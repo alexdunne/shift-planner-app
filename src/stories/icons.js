@@ -11,7 +11,11 @@ const storybook = storiesOf("Icons", module);
 icons.keys().forEach(filename => {
   const componentName = filename.replace("./", "").replace(".js", "");
 
-  if (!componentName || componentName.trim().length === 0) {
+  if (
+    !componentName ||
+    componentName.trim().length === 0 ||
+    componentName === "Icon"
+  ) {
     return;
   }
 
@@ -22,16 +26,17 @@ icons.keys().forEach(filename => {
   storybook.add(componentName, () => (
     <div style={{ margin: "0 auto", width: "75%" }}>
       <StoryRow>
-        {sizes.map(size => (
-          <Icon size={size}>
-            <Component />
-          </Icon>
-        ))}
+        {sizes.map(size => <Icon icon={componentName} size={size} />)}
       </StoryRow>
 
       <StoryRow>
         {sizes.map(size => (
-          <Icon size={size} backgroundColor="#31AD98" iconColour="#FFFFFF">
+          <Icon
+            icon={componentName}
+            size={size}
+            backgroundColor="#31AD98"
+            iconColour="#FFFFFF"
+          >
             <Component />
           </Icon>
         ))}

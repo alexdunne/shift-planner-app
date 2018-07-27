@@ -1,6 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+const availableIcons = {
+  LockedLock: require("./LockedLock").default,
+  UnlockedLock: require("./UnlockedLock").default
+};
+
 const SIZE_SCALE = {
   xs: 16,
   sm: 24,
@@ -10,10 +15,10 @@ const SIZE_SCALE = {
 };
 
 const Icon = ({
-  children,
-  size = "md",
   backgroundColor = null,
-  iconColour = null
+  icon = null,
+  iconColour = null,
+  size = "md"
 }) => {
   const containerStyles = {
     width: SIZE_SCALE[size],
@@ -33,17 +38,21 @@ const Icon = ({
     containerStyles.color = iconColour;
   }
 
+  const Icon = availableIcons[icon];
+
   return (
     <div style={containerStyles}>
-      <div>{children}</div>
+      <div>
+        <Icon />
+      </div>
     </div>
   );
 };
 
 Icon.propTypes = {
   backgroundColor: PropTypes.string,
+  icon: PropTypes.oneOf(["LockedLock", "UnlockedLock"]).isRequired,
   iconColour: PropTypes.string,
-  children: PropTypes.node.isRequired,
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"])
 };
 
