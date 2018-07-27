@@ -1,5 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
 
 import Icon from "../components/Icon/Icon";
 import StoryRow from "../components/StoryRow";
@@ -26,7 +27,9 @@ icons.keys().forEach(filename => {
   storybook.add(componentName, () => (
     <div style={{ margin: "0 auto", width: "75%" }}>
       <StoryRow>
-        {sizes.map(size => <Icon name={componentName} size={size} />)}
+        {sizes.map(size => (
+          <Icon name={componentName} size={size} onPress={action("Pressed")} />
+        ))}
       </StoryRow>
 
       <StoryRow>
@@ -36,6 +39,7 @@ icons.keys().forEach(filename => {
             size={size}
             backgroundColor="#31AD98"
             iconColour="#FFFFFF"
+            onPress={action("Pressed")}
           >
             <Component />
           </Icon>
