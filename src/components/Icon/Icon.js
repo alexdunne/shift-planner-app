@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const availableIcons = {
+  Hamburger: require("./Hamburger").default,
   LockedLock: require("./LockedLock").default,
   UnlockedLock: require("./UnlockedLock").default
 };
@@ -16,7 +17,7 @@ const SIZE_SCALE = {
 
 const Icon = ({
   backgroundColor = null,
-  icon = null,
+  name = null,
   iconColour = null,
   size = "md"
 }) => {
@@ -27,7 +28,8 @@ const Icon = ({
     borderRadius: "50%",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    fontSize: "1rem"
   };
 
   if (backgroundColor) {
@@ -38,7 +40,7 @@ const Icon = ({
     containerStyles.color = iconColour;
   }
 
-  const Icon = availableIcons[icon];
+  const Icon = availableIcons[name];
 
   return (
     <div style={containerStyles}>
@@ -51,7 +53,7 @@ const Icon = ({
 
 Icon.propTypes = {
   backgroundColor: PropTypes.string,
-  icon: PropTypes.oneOf(["LockedLock", "UnlockedLock"]).isRequired,
+  name: PropTypes.oneOf(["Hamburger", "LockedLock", "UnlockedLock"]).isRequired,
   iconColour: PropTypes.string,
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"])
 };

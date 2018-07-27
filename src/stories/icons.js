@@ -1,10 +1,10 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import Icon from "../components/Icons/Icon";
+import Icon from "../components/Icon/Icon";
 import StoryRow from "../components/StoryRow";
 
-const icons = require.context("../components/Icons", false, /\.js$/);
+const icons = require.context("../components/Icon", false, /\.js$/);
 
 const storybook = storiesOf("Icons", module);
 
@@ -19,20 +19,20 @@ icons.keys().forEach(filename => {
     return;
   }
 
-  const Component = require(`../components/Icons/${componentName}`).default;
+  const Component = require(`../components/Icon/${componentName}`).default;
 
   const sizes = ["xs", "sm", "md", "lg", "xl"];
 
   storybook.add(componentName, () => (
     <div style={{ margin: "0 auto", width: "75%" }}>
       <StoryRow>
-        {sizes.map(size => <Icon icon={componentName} size={size} />)}
+        {sizes.map(size => <Icon name={componentName} size={size} />)}
       </StoryRow>
 
       <StoryRow>
         {sizes.map(size => (
           <Icon
-            icon={componentName}
+            name={componentName}
             size={size}
             backgroundColor="#31AD98"
             iconColour="#FFFFFF"
