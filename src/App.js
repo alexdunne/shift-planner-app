@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 
+import AppHeader from "./components/AppHeader";
+
 class App extends Component {
   render() {
-    return <div>Shift planner</div>;
+    return (
+      <main>
+        <AppHeader />
+      </main>
+    );
   }
 }
 
