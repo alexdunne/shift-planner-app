@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import AppHeader from "./components/AppHeader";
+import Planner from "./components/Planner";
 
 class App extends Component {
   state = {
@@ -14,6 +15,7 @@ class App extends Component {
           locked={this.state.locked}
           onToggleLocked={() => this.setState({ locked: !this.state.locked })}
         />
+        <Planner />
       </main>
     );
   }

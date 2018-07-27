@@ -32,7 +32,8 @@ const Icon = ({
     justifyContent: "center",
     alignItems: "center",
     fontSize: "1rem",
-    cursor: "pointer"
+    cursor: "pointer",
+    boxSizing: "initial"
   };
 
   if (backgroundColor) {
