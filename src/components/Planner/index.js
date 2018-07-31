@@ -15,24 +15,21 @@ import { Container, Row, Col } from "../Grid";
 import "./index.css";
 
 /**
- * Given a month and a year, this function builds up a 2D array of each
+ * Given a date, this function builds up a 2D array of each
  * week in the month and each day in the week. Where weeks do not have 7 days
  * which all belong to the same month (e.g. 1st is a Wednesday) null is used
  * as a placeholder
  */
-const getWeeks = memoizeOne((month, year) => {
+const getWeeks = memoizeOne(startDate => {
   const weeks = [];
-
-  const startDate = new Date(year, month, 1);
-  const days = eachDay(startDate, endOfMonth(startDate));
-
   let week = [];
 
-  // We may need to pad the start of the first week if it is not a monday
-  const firstDayOfTheWeek = startOfWeek(days[0]);
+  const days = eachDay(startDate, endOfMonth(startDate));
+  const firstDayOfTheMonth = days[0];
+
   const firstWeekPlaceholderCount = differenceInDays(
-    days[0],
-    firstDayOfTheWeek
+    firstDayOfTheMonth,
+    startOfWeek(firstDayOfTheMonth)
   );
 
   if (firstWeekPlaceholderCount > 0) {
@@ -61,7 +58,12 @@ const getWeeks = memoizeOne((month, year) => {
 });
 
 const Planner = ({ month, year }) => {
-  const weeks = getWeeks(month, year);
+  if (!month || !year) {
+    console.warn("Props month and year are both required");
+    return null;
+  }
+
+  const weeks = getWeeks(new Date(year, month - 1, 1));
 
   return (
     <section className="planner">
@@ -69,7 +71,9 @@ const Planner = ({ month, year }) => {
         {weeks.map((week, index) => (
           <Row key={index}>
             {week.map((day, index) => (
-              <Col key={index}>{day ? format(day, "D") : <div />}</Col>
+              <Col key={index} span={1}>
+                {day ? format(day, "D") : <div />}
+              </Col>
             ))}
           </Row>
         ))}
