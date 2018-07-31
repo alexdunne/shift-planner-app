@@ -5,7 +5,6 @@ import Icon from "../components/Icon/Icon";
 import Header from "../components/Header";
 
 storiesOf("Header", module)
-  .add("no props", () => <Header />)
   .add("with left prop", () => (
     <Header
       left={
@@ -24,12 +23,14 @@ storiesOf("Header", module)
   .add("with right prop", () => (
     <Header
       right={
-        <Icon
-          name="Hamburger"
-          size="xs"
-          backgroundColor="#03A9F4"
-          iconColour="#FFFFFF"
-        />
+        <div className="float-right">
+          <Icon
+            name="Hamburger"
+            size="xs"
+            backgroundColor="#03A9F4"
+            iconColour="#FFFFFF"
+          />
+        </div>
       }
     />
   ))
@@ -45,12 +46,14 @@ storiesOf("Header", module)
       }
       center={<div className="text-center">Header</div>}
       right={
-        <Icon
-          name="Hamburger"
-          size="xs"
-          backgroundColor="#03A9F4"
-          iconColour="#FFFFFF"
-        />
+        <div className="float-right">
+          <Icon
+            name="Hamburger"
+            size="xs"
+            backgroundColor="#03A9F4"
+            iconColour="#FFFFFF"
+          />
+        </div>
       }
     />
   ));
