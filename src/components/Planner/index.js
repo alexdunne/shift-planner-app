@@ -20,7 +20,9 @@ import "./index.css";
  * which all belong to the same month (e.g. 1st is a Wednesday) null is used
  * as a placeholder
  */
-const getWeeks = memoizeOne(startDate => {
+const getWeeks = memoizeOne((month, year) => {
+  const startDate = new Date(year, month - 1, 1);
+
   const weeks = [];
   let week = [];
 
@@ -63,7 +65,7 @@ const Planner = ({ month, year }) => {
     return null;
   }
 
-  const weeks = getWeeks(new Date(year, month - 1, 1));
+  const weeks = getWeeks(month, year);
 
   return (
     <section className="planner">

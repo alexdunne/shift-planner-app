@@ -8,7 +8,7 @@ import Planner from "../components/Planner";
 const now = new Date();
 
 storiesOf("Planner", module).add(
-  "Planner",
+  "Month and year selection",
   withState({ month: now.getMonth() + 1, year: now.getFullYear() })(
     ({ store }) => (
       <Container>
