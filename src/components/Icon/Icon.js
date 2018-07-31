@@ -33,7 +33,8 @@ const Icon = ({
     alignItems: "center",
     fontSize: "1rem",
     cursor: "pointer",
-    boxSizing: "initial"
+    boxSizing: "initial",
+    lineHeight: "1"
   };
 
   if (backgroundColor) {

@@ -15,14 +15,17 @@ const AppHeader = ({ locked, onToggleLocked }) => (
         onPress={onToggleLocked}
       />
     }
+    center={<div className="text-center">Shift planner</div>}
     right={
-      <Icon
-        name="Hamburger"
-        size="xs"
-        backgroundColor="#03A9F4"
-        iconColour="#FFFFFF"
-        onPress={onToggleLocked}
-      />
+      <div className="float-right">
+        <Icon
+          name="Hamburger"
+          size="xs"
+          backgroundColor="#03A9F4"
+          iconColour="#FFFFFF"
+          onPress={onToggleLocked}
+        />
+      </div>
     }
   />
 );

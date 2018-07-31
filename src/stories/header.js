@@ -18,6 +18,9 @@ storiesOf("Header", module)
       }
     />
   ))
+  .add("with center prop", () => (
+    <Header center={<div className="text-center">Header</div>} />
+  ))
   .add("with right prop", () => (
     <Header
       right={
@@ -30,7 +33,7 @@ storiesOf("Header", module)
       }
     />
   ))
-  .add("with left and right prop", () => (
+  .add("with all slot props", () => (
     <Header
       left={
         <Icon
@@ -40,6 +43,7 @@ storiesOf("Header", module)
           iconColour="#FFFFFF"
         />
       }
+      center={<div className="text-center">Header</div>}
       right={
         <Icon
           name="Hamburger"
