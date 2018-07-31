@@ -15,7 +15,7 @@ class App extends Component {
           locked={this.state.locked}
           onToggleLocked={() => this.setState({ locked: !this.state.locked })}
         />
-        <Planner />
+        <Planner month={7} year={2018} />
       </main>
     );
   }
