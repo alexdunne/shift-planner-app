@@ -1,33 +1,43 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Header from "../Header";
+import { Container, Row, Col } from "../Grid";
 import Icon from "../Icon/Icon";
 
+import "./index.css";
+
 const AppHeader = ({ locked, onToggleLocked }) => (
-  <Header
-    left={
-      <Icon
-        name={locked ? "LockedLock" : "Edit"}
-        size="xs"
-        backgroundColor={locked ? "#F44336" : "#4CAF50"}
-        iconColour="#FFFFFF"
-        onPress={onToggleLocked}
-      />
-    }
-    center={<div className="text-center">Shift planner</div>}
-    right={
-      <div className="float-right">
-        <Icon
-          name="Hamburger"
-          size="xs"
-          backgroundColor="#03A9F4"
-          iconColour="#FFFFFF"
-          onPress={onToggleLocked}
-        />
-      </div>
-    }
-  />
+  <header className="app-header">
+    <Container>
+      <Row alignItems="center">
+        <Col span={2}>
+          {
+            <Icon
+              name={locked ? "LockedLock" : "Edit"}
+              size="xs"
+              backgroundColor={locked ? "#F44336" : "#4CAF50"}
+              iconColour="#FFFFFF"
+              onPress={onToggleLocked}
+            />
+          }
+        </Col>
+        <Col span={8}>{<div className="text-center">Shift planner</div>}</Col>
+        <Col span={2}>
+          {
+            <div className="float-right">
+              <Icon
+                name="Hamburger"
+                size="xs"
+                backgroundColor="#03A9F4"
+                iconColour="#FFFFFF"
+                onPress={onToggleLocked}
+              />
+            </div>
+          }
+        </Col>
+      </Row>
+    </Container>
+  </header>
 );
 
 AppHeader.propTypes = {
