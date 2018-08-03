@@ -10,7 +10,7 @@ import isLastDayOfMonth from "date-fns/is_last_day_of_month";
 import isEqual from "date-fns/is_equal";
 import memoizeOne from "memoize-one";
 
-import { Container, Row, Col } from "../Grid";
+import { Container, Row, Col } from "../../Grid";
 
 import "./index.css";
 
@@ -45,8 +45,7 @@ const getWeeks = memoizeOne((month, year) => {
 
     if (isEqual(day, lastDayOfWeek(day)) || isLastDayOfMonth(day)) {
       if (isLastDayOfMonth(day)) {
-        // We may also need to pad out the days in the last week
-        for (let i = 0; i < 7 - week.length; i++) {
+        while (week.length < 7) {
           week.push(null);
         }
       }
@@ -59,7 +58,7 @@ const getWeeks = memoizeOne((month, year) => {
   return weeks;
 });
 
-const Planner = ({ month, year }) => {
+const Overview = ({ month, year, renderDay }) => {
   if (!month || !year) {
     console.warn("Props month and year are both required");
     return null;
@@ -68,14 +67,12 @@ const Planner = ({ month, year }) => {
   const weeks = getWeeks(month, year);
 
   return (
-    <section className="planner">
+    <section className="overview">
       <Container>
         {weeks.map((week, index) => (
           <Row key={index}>
             {week.map((day, index) => (
-              <Col key={index} span={1}>
-                {day ? format(day, "D") : <div />}
-              </Col>
+              <Col key={index}>{renderDay({ date: day })}</Col>
             ))}
           </Row>
         ))}
@@ -84,9 +81,14 @@ const Planner = ({ month, year }) => {
   );
 };
 
-Planner.propTypes = {
-  month: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]).isRequired,
-  year: PropTypes.number.isRequired
+Overview.defaultProps = {
+  renderDay: ({ date }) => <div>{format(date, "D")}</div>
 };
 
-export default Planner;
+Overview.propTypes = {
+  month: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]).isRequired,
+  year: PropTypes.number.isRequired,
+  renderDay: PropTypes.func
+};
+
+export default Overview;
