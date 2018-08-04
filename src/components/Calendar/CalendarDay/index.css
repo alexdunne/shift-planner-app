@@ -1,8 +1,8 @@
 .calendar-day-block {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  margin-right: 3px;
-  margin-left: 3px;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  margin-right: 1px;
+  margin-left: 1px;
 }
 
 .calendar-day-interactive {

@@ -4,6 +4,7 @@
 
 svg {
   box-sizing: content-box;
+  user-select: none;
 }
 
 body {

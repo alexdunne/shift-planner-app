@@ -71,7 +71,7 @@ const Overview = ({ month, year, renderDay }) => {
     <section className="overview">
       <Container>
         {weeks.map((week, index) => (
-          <Row key={index} className="mb-2">
+          <Row key={index} className="mb-1">
             {week.map((day, index) => (
               <React.Fragment key={index}>
                 {renderDay({ date: day })}
