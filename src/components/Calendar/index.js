@@ -1,4 +1,5 @@
 import Overview from "./Overview";
 import CalendarDay from "./CalendarDay";
+import MonthPicker from "./MonthPicker";
 
-export { Overview, CalendarDay };
+export { Overview, CalendarDay, MonthPicker };

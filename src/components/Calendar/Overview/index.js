@@ -12,8 +12,6 @@ import memoizeOne from "memoize-one";
 
 import { Container, Row, Col } from "../../Grid";
 
-import "./index.css";
-
 /**
  * Given a date, this function builds up a 2D array of each
  * week in the month and each day in the week. Where weeks do not have 7 days

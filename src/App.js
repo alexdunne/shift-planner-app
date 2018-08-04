@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import AppHeader from "./components/AppHeader";
-import { Overview, CalendarDay } from "./components/Calendar";
+import { Overview, CalendarDay, MonthPicker } from "./components/Calendar";
 import { Container, Row, Col } from "./components/Grid";
 
 import "./App.css";
@@ -9,7 +9,8 @@ import "./App.css";
 class App extends Component {
   state = {
     locked: true,
-    today: new Date(),
+    month: new Date().getMonth() + 1,
+    year: new Date().getFullYear(),
     dayHeaders: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     dates: {},
     availableColours: [
@@ -60,14 +61,27 @@ class App extends Component {
         />
         <Container className="calendar" fluid={false}>
           <Row className="mb-3">
+            <Col span={6}>
+              <MonthPicker
+                onChange={({ value }) => {
+                  this.setState({ month: value });
+                }}
+                value={this.state.month}
+              />
+            </Col>
+
+            <Col span={6} />
+          </Row>
+
+          <Row className="mb-3">
             {this.state.dayHeaders.map(day => <Col key={day}>{day}</Col>)}
           </Row>
 
           <Row>
             <Col>
               <Overview
-                month={this.state.today.getMonth() + 1}
-                year={this.state.today.getFullYear()}
+                month={this.state.month}
+                year={this.state.year}
                 renderDay={({ date }) => {
                   const dateSettings = date
                     ? this.state.dates[date.getTime()]

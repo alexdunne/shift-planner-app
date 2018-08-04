@@ -49,7 +49,7 @@ const Icon = ({
 
   return (
     <div style={containerStyles} onClick={onPress}>
-      <div>
+      <div className="fill-width">
         <Icon />
       </div>
     </div>

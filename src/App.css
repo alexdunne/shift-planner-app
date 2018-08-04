@@ -4,7 +4,7 @@
 }
 
 .calendar {
-  height: calc(100vh - 73px);
-  margin-top: 1.5rem;
   text-align: center;
+  width: 100%;
+  padding: 15px 20px;
 }
