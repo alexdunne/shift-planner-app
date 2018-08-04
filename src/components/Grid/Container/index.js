@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Container = ({ children, fluid }) => {
+const Container = ({ children, fluid, className }) => {
   if (process.env.NODE_ENV === "development") {
     React.Children.forEach(children, (child, index) => {
       if (child.type.name !== "Row") {
@@ -12,15 +12,21 @@ const Container = ({ children, fluid }) => {
     });
   }
 
-  return <div className={`container${fluid ? ":-fluid" : ""}`}>{children}</div>;
+  return (
+    <div className={`container${fluid ? ":-fluid" : ""} ${className}`}>
+      {children}
+    </div>
+  );
 };
 
 Container.defaultProps = {
-  fluid: true
+  fluid: true,
+  className: ""
 };
 
 Container.propTypes = {
-  fluid: PropTypes.bool
+  fluid: PropTypes.bool,
+  className: PropTypes.string
 };
 
 export default Container;

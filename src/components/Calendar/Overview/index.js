@@ -70,9 +70,11 @@ const Overview = ({ month, year, renderDay }) => {
     <section className="overview">
       <Container>
         {weeks.map((week, index) => (
-          <Row key={index}>
+          <Row key={index} className="mb-1">
             {week.map((day, index) => (
-              <Col key={index}>{renderDay({ date: day })}</Col>
+              <React.Fragment key={index}>
+                {renderDay({ date: day })}
+              </React.Fragment>
             ))}
           </Row>
         ))}
@@ -82,7 +84,7 @@ const Overview = ({ month, year, renderDay }) => {
 };
 
 Overview.defaultProps = {
-  renderDay: ({ date }) => <div>{format(date, "D")}</div>
+  renderDay: ({ date }) => <Col>{date ? format(date, "D") : null}</Col>
 };
 
 Overview.propTypes = {

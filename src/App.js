@@ -6,6 +6,8 @@ import { Container, Row, Col } from "./components/Grid";
 
 class App extends Component {
   state = {
+    date: new Date(),
+    days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     locked: true
   };
 
@@ -16,12 +18,16 @@ class App extends Component {
           locked={this.state.locked}
           onToggleLocked={() => this.setState({ locked: !this.state.locked })}
         />
-        <Container fluid={false}>
+        <Container className="mt-4 text-center" fluid={false}>
+          <Row className="mb-3">
+            {this.state.days.map(day => <Col>{day}</Col>)}
+          </Row>
+
           <Row>
             <Col>
               <Overview
-                month={7}
-                year={2018}
+                month={this.state.date.getMonth() + 1}
+                year={this.state.date.getFullYear()}
                 renderDay={({ date }) => <CalendarDay date={date} />}
               />
             </Col>
