@@ -31,19 +31,20 @@ const getWeeks = memoizeOne((month, year) => {
 
   const firstWeekPlaceholderCount = differenceInDays(
     firstDayOfTheMonth,
-    startOfWeek(firstDayOfTheMonth)
+    startOfWeek(firstDayOfTheMonth, { weekStartsOn: 1 })
   );
 
-  if (firstWeekPlaceholderCount > 0) {
-    for (let i = 0; i < firstWeekPlaceholderCount; i++) {
-      week.push(null);
-    }
+  for (let i = 0; i < firstWeekPlaceholderCount; i++) {
+    week.push(null);
   }
 
   days.forEach(day => {
     week.push(day);
 
-    if (isEqual(day, lastDayOfWeek(day)) || isLastDayOfMonth(day)) {
+    if (
+      isEqual(day, lastDayOfWeek(day, { weekStartsOn: 1 })) ||
+      isLastDayOfMonth(day)
+    ) {
       if (isLastDayOfMonth(day)) {
         while (week.length < 7) {
           week.push(null);

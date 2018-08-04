@@ -20,7 +20,7 @@ class App extends Component {
         />
         <Container className="mt-4 text-center" fluid={false}>
           <Row className="mb-3">
-            {this.state.days.map(day => <Col>{day}</Col>)}
+            {this.state.days.map(day => <Col key={day}>{day}</Col>)}
           </Row>
 
           <Row>
