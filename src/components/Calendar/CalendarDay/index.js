@@ -6,18 +6,23 @@ import { Col } from "../../Grid";
 
 import "./index.css";
 
-const CalendarDay = ({ date, backgroundColor }) =>
+const CalendarDay = ({ date, backgroundColor, onClick }) =>
   date ? (
-    <Col className="calendar-day" style={{ backgroundColor }}>
+    <Col
+      className="calendar-day-block calendar-day-interactive"
+      style={{ backgroundColor }}
+      onClick={onClick}
+    >
       {format(date, "D")}
     </Col>
   ) : (
-    <Col />
+    <Col className="calendar-day-block" />
   );
 
 CalendarDay.propTypes = {
   date: PropTypes.instanceOf(Date),
-  backgroundColor: PropTypes.string
+  backgroundColor: PropTypes.string,
+  onClick: PropTypes.func.isRequired
 };
 
 export default CalendarDay;

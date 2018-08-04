@@ -1,11 +1,17 @@
-.calendar-day {
-  font-size: 0.85rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  cursor: pointer;
-  transition: background-color 150ms ease-in-out;
+.calendar-day-block {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  margin-right: 3px;
+  margin-left: 3px;
 }
 
-.calendar-day:hover {
-  background-color: #efefef;
+.calendar-day-interactive {
+  cursor: pointer;
+  user-select: none;
+  border-radius: 5px;
+}
+
+.calendar-day:first-of-type,
+.calendar-day:last-of-type {
+  margin-right: 0;
 }

@@ -1,0 +1,10 @@
+.app {
+  background-color: #455a64;
+  color: #ffffff;
+}
+
+.calendar {
+  height: calc(100vh - 73px);
+  margin-top: 1.5rem;
+  text-align: center;
+}
