@@ -30,7 +30,6 @@ const AppHeader = ({ locked, onToggleLocked }) => (
                 size="xs"
                 backgroundColor="#03A9F4"
                 iconColour="#FFFFFF"
-                onPress={onToggleLocked}
               />
             </div>
           }
