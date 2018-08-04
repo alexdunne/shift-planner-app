@@ -80,7 +80,9 @@ class App extends Component {
                     <CalendarDay
                       date={date}
                       backgroundColor={backgroundColour}
-                      onClick={() => this.handleDayClicked(date)}
+                      onClick={() =>
+                        !this.state.locked && this.handleDayClicked(date)
+                      }
                     />
                   );
                 }}
