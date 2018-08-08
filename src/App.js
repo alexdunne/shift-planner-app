@@ -151,7 +151,7 @@ class App extends Component {
           </Row>
 
           <Row>
-            <Col>
+            <Col className="pl-1 pr-1">
               <Overview
                 month={month}
                 year={year}
