@@ -59,8 +59,13 @@ const Icon = ({
 
 Icon.propTypes = {
   backgroundColor: PropTypes.string,
-  name: PropTypes.oneOf(["Edit", "Hamburger", "LockedLock", "UnlockedLock"])
-    .isRequired,
+  name: PropTypes.oneOf([
+    "Edit",
+    "Hamburger",
+    "LockedLock",
+    "UnlockedLock",
+    "Link"
+  ]).isRequired,
   iconColour: PropTypes.string,
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
   onPress: PropTypes.func

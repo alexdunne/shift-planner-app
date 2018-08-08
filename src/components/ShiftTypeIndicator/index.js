@@ -11,7 +11,7 @@ const ShiftTypeIndicator = ({ displayName, color }) => (
 
 ShiftTypeIndicator.propTypes = {
   displayName: PropTypes.string.isRequired,
-  backgroundColor: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired
 };
 
 export default ShiftTypeIndicator;

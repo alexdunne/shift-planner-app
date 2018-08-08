@@ -13,7 +13,7 @@ const Container = ({ children, fluid, className }) => {
   }
 
   return (
-    <div className={`container${fluid ? ":-fluid" : ""} ${className}`}>
+    <div className={`container${fluid ? "-fluid" : ""} ${className}`}>
       {children}
     </div>
   );

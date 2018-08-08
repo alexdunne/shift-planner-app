@@ -110,21 +110,23 @@ class App extends Component {
           locked={locked}
           onToggleLocked={this.handleLockedStatusChanged}
         />
-        <Container className="calendar" fluid={false}>
-          <Row>
-            {shiftTypes.allIds.map(id => shiftTypes.byId[id]).map(shiftType => (
-              <Col span={6} className="mb-3">
-                <ShiftTypeIndicator
-                  displayName={shiftType.displayName}
-                  color={shiftType.color}
-                />
-              </Col>
-            ))}
+        <Container className="calendar app-container">
+          <Row className="mb-2">
+            {shiftTypes.allIds
+              .map(id => ({ id, ...shiftTypes.byId[id] }))
+              .map(shiftType => (
+                <Col key={shiftType.id} span={6} className="mb-2">
+                  <ShiftTypeIndicator
+                    displayName={shiftType.displayName}
+                    color={shiftType.color}
+                  />
+                </Col>
+              ))}
 
             <Col span={6} />
           </Row>
 
-          <Row className="mb-3">
+          <Row className="mb-4">
             <Col span={6}>
               <MonthPicker
                 onChange={({ value }) => {

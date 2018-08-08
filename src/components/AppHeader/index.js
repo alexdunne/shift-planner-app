@@ -8,7 +8,7 @@ import "./index.css";
 
 const AppHeader = ({ locked, onToggleLocked }) => (
   <header className="app-header">
-    <Container>
+    <Container className="app-container">
       <Row alignItems="center">
         <Col span={2}>
           {
@@ -28,7 +28,7 @@ const AppHeader = ({ locked, onToggleLocked }) => (
               <a
                 href="https://github.com/alexdunne/shift-planner-app"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
               >
                 <Icon
                   name="Link"
