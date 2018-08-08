@@ -8,6 +8,7 @@ import {
   YearPicker
 } from "./components/Calendar";
 import { Container, Row, Col } from "./components/Grid";
+import ShiftTypeIndicator from "./components/ShiftTypeIndicator";
 
 import "./App.css";
 
@@ -26,22 +27,22 @@ class App extends Component {
         1: {
           displayName: "Day shift",
           reference: "day_shift",
-          backgroundColor: "#F44336"
+          color: "#FF5722"
         },
         2: {
           displayName: "Night shift",
           reference: "night_shift",
-          backgroundColor: "#009688"
+          color: "#FFC107"
         },
         3: {
           displayName: "Holiday",
           reference: "holiday",
-          backgroundColor: "#4CAF50"
+          color: "#4CAF50"
         },
         4: {
           displayName: "Study day",
           reference: "study_day",
-          backgroundColor: "#00BCD4"
+          color: "#00BCD4"
         }
       },
       allIds: [1, 2, 3, 4]
@@ -101,20 +102,35 @@ class App extends Component {
   };
 
   render() {
+    const { locked, shifts, shiftTypes, month, year, dayHeaders } = this.state;
+
     return (
       <main className="app">
         <AppHeader
-          locked={this.state.locked}
+          locked={locked}
           onToggleLocked={this.handleLockedStatusChanged}
         />
         <Container className="calendar" fluid={false}>
+          <Row>
+            {shiftTypes.allIds.map(id => shiftTypes.byId[id]).map(shiftType => (
+              <Col span={6} className="mb-3">
+                <ShiftTypeIndicator
+                  displayName={shiftType.displayName}
+                  color={shiftType.color}
+                />
+              </Col>
+            ))}
+
+            <Col span={6} />
+          </Row>
+
           <Row className="mb-3">
             <Col span={6}>
               <MonthPicker
                 onChange={({ value }) => {
                   this.setState({ month: value });
                 }}
-                value={this.state.month}
+                value={month}
               />
             </Col>
 
@@ -123,33 +139,29 @@ class App extends Component {
                 onChange={({ value }) => {
                   this.setState({ year: value });
                 }}
-                value={this.state.year}
+                value={year}
               />
             </Col>
           </Row>
 
           <Row className="mb-3">
-            {this.state.dayHeaders.map(day => <Col key={day}>{day}</Col>)}
+            {dayHeaders.map(day => <Col key={day}>{day}</Col>)}
           </Row>
 
           <Row>
             <Col>
               <Overview
-                month={this.state.month}
-                year={this.state.year}
+                month={month}
+                year={year}
                 renderDay={({ date }) => {
-                  const shift = date ? this.state.shifts[date.getTime()] : null;
-                  const shiftType = shift
-                    ? this.state.shiftTypes.byId[shift.type]
-                    : null;
+                  const shift = date ? shifts[date.getTime()] : null;
+                  const shiftType = shift ? shiftTypes.byId[shift.type] : null;
 
                   return (
                     <CalendarDay
                       date={date}
-                      backgroundColor={shiftType && shiftType.backgroundColor}
-                      onClick={() =>
-                        !this.state.locked && this.handleDayClicked(date)
-                      }
+                      backgroundColor={shiftType && shiftType.color}
+                      onClick={() => !locked && this.handleDayClicked(date)}
                     />
                   );
                 }}
