@@ -18,25 +18,44 @@ class App extends Component {
     year: new Date().getFullYear(),
     dayHeaders: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     dates: {},
-    availableColours: [
-      "#37474F",
-      "#F44336",
-      "#009688",
-      "#4CAF50",
-      "#00BCD4",
-      "#FF9800"
-    ]
+    shiftTypes: {
+      byId: {
+        1: {
+          displayName: "Day shift",
+          reference: "day_shift",
+          backgroundColor: "#F44336"
+        },
+        2: {
+          displayName: "Night shift",
+          reference: "night_shift",
+          backgroundColor: "#009688"
+        },
+        3: {
+          displayName: "Holiday",
+          reference: "holiday",
+          backgroundColor: "#4CAF50"
+        },
+        4: {
+          displayName: "Study day",
+          reference: "study_day",
+          backgroundColor: "#00BCD4"
+        }
+      },
+      allIds: [1, 2, 3, 4]
+    }
   };
 
   handleDayClicked = date => {
     const key = date.getTime();
+    const shiftTypes = this.state.shiftTypes;
+    const shift = this.state.dates[key];
 
-    if (!this.state.dates[key]) {
+    if (!shift) {
       this.setState({
         dates: {
           ...this.state.dates,
           [key]: {
-            colourIndex: 1
+            shiftType: 1
           }
         }
       });
@@ -44,14 +63,13 @@ class App extends Component {
       return;
     }
 
-    const currentColourIndex = this.state.dates[key].colourIndex;
-
     this.setState({
       dates: {
         ...this.state.dates,
         [key]: {
           ...this.state.dates[key],
-          colourIndex: currentColourIndex === 5 ? 0 : currentColourIndex + 1
+          shiftType:
+            shift.shiftType >= shiftTypes.allIds.length ? 0 : ++shift.shiftType
         }
       }
     });
@@ -98,14 +116,14 @@ class App extends Component {
                   const dateSettings = date
                     ? this.state.dates[date.getTime()]
                     : null;
-                  const backgroundColour = dateSettings
-                    ? this.state.availableColours[dateSettings.colourIndex]
-                    : this.state.availableColours[0];
+                  const shiftType = dateSettings
+                    ? this.state.shiftTypes.byId[dateSettings.shiftType]
+                    : null;
 
                   return (
                     <CalendarDay
                       date={date}
-                      backgroundColor={backgroundColour}
+                      backgroundColor={shiftType && shiftType.backgroundColor}
                       onClick={() =>
                         !this.state.locked && this.handleDayClicked(date)
                       }
