@@ -22,18 +22,7 @@ const AppHeader = ({ locked, onToggleLocked }) => (
           }
         </Col>
         <Col span={8}>{<div className="text-center">Shift planner</div>}</Col>
-        <Col span={2}>
-          {
-            <div className="float-right">
-              <Icon
-                name="Hamburger"
-                size="xs"
-                backgroundColor="#03A9F4"
-                iconColour="#FFFFFF"
-              />
-            </div>
-          }
-        </Col>
+        <Col span={2} />
       </Row>
     </Container>
   </header>
