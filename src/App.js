@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 
 import AppHeader from "./components/AppHeader";
-import { Overview, CalendarDay, MonthPicker } from "./components/Calendar";
+import {
+  Overview,
+  CalendarDay,
+  MonthPicker,
+  YearPicker
+} from "./components/Calendar";
 import { Container, Row, Col } from "./components/Grid";
 
 import "./App.css";
@@ -70,7 +75,14 @@ class App extends Component {
               />
             </Col>
 
-            <Col span={6} />
+            <Col span={6}>
+              <YearPicker
+                onChange={({ value }) => {
+                  this.setState({ year: value });
+                }}
+                value={this.state.year}
+              />
+            </Col>
           </Row>
 
           <Row className="mb-3">
