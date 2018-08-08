@@ -27,7 +27,7 @@ class App extends Component {
         1: {
           displayName: "Day shift",
           reference: "day_shift",
-          color: "#FF5722"
+          color: "#9e9e9e"
         },
         2: {
           displayName: "Night shift",
