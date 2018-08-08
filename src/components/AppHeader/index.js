@@ -8,7 +8,7 @@ import "./index.css";
 
 const AppHeader = ({ locked, onToggleLocked }) => (
   <header className="app-header">
-    <Container className="app-container">
+    <div className="app-container">
       <Row alignItems="center">
         <Col span={2}>
           {
@@ -41,7 +41,7 @@ const AppHeader = ({ locked, onToggleLocked }) => (
           }
         </Col>
       </Row>
-    </Container>
+    </div>
   </header>
 );
 
