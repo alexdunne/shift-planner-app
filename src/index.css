@@ -9,6 +9,10 @@ body,
   height: 100%;
 }
 
+#root {
+  overflow: hidden;
+}
+
 svg {
   box-sizing: content-box;
   user-select: none;
