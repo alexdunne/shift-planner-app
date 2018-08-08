@@ -22,7 +22,24 @@ const AppHeader = ({ locked, onToggleLocked }) => (
           }
         </Col>
         <Col span={8}>{<div className="text-center">Shift planner</div>}</Col>
-        <Col span={2} />
+        <Col span={2}>
+          {
+            <div className="float-right">
+              <a
+                href="https://github.com/alexdunne/shift-planner-app"
+                target="_blank"
+                rel="noopener"
+              >
+                <Icon
+                  name="Link"
+                  size="xs"
+                  backgroundColor="#03A9F4"
+                  iconColour="#FFFFFF"
+                />
+              </a>
+            </div>
+          }
+        </Col>
       </Row>
     </Container>
   </header>

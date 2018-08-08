@@ -5,6 +5,7 @@ const availableIcons = {
   Edit: require("./Edit").default,
   Hamburger: require("./Hamburger").default,
   LockedLock: require("./LockedLock").default,
+  Link: require("./Link").default,
   UnlockedLock: require("./UnlockedLock").default
 };
 
