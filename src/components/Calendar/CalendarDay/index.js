@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 import format from "date-fns/format";
 
 import { Col } from "../../Grid";
@@ -8,17 +7,14 @@ import { Col } from "../../Grid";
 import "./index.css";
 
 const CalendarDay = ({ date, backgroundColor, isToday, onClick }) => {
-  const className = classnames("calendar-day__day", {
-    "calendar-day__day--today": isToday
-  });
-
   return date ? (
     <Col
       className="calendar-day-block calendar-day-interactive"
       style={{ backgroundColor }}
       onClick={onClick}
     >
-      <div className={className}>{format(date, "D")}</div>
+      <div className="calendar-day__day">{format(date, "D")}</div>
+      {isToday && <div className="calendar-day__today" />}
     </Col>
   ) : (
     <Col className="calendar-day-block" />

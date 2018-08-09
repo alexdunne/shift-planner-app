@@ -6,19 +6,20 @@
 }
 
 .calendar-day-interactive {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   user-select: none;
   border-radius: 5px;
   background-color: #223140;
 }
 
-.calendar-day__day {
-  padding-bottom: 1px;
-}
-
-.calendar-day__day--today {
-  border-bottom: 1px solid #ffffff;
-  padding-bottom: 0;
+.calendar-day__today {
+  height: 1px;
+  width: 1rem;
+  background-color: #ffffff;
 }
 
 .calendar-day:first-of-type,
