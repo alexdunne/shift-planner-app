@@ -9,7 +9,7 @@ const CalendarLockToggle = ({ locked, onToggle }) => (
     style={{ backgroundColor: locked ? "#E91E63" : "#4CAF50" }}
     onClick={onToggle}
   >
-    <div>{locked ? "Unlock" : "Editing"}</div>
+    {locked ? "Unlock" : "Editing"}
   </button>
 );
 
