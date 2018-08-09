@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Container, Row, Col } from "../Grid";
+import { Row, Col } from "../Grid";
 import Icon from "../Icon/Icon";
 
 import "./index.css";

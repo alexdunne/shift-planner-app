@@ -12,6 +12,15 @@
   background-color: #223140;
 }
 
+.calendar-day__day {
+  padding-bottom: 1px;
+}
+
+.calendar-day__day--today {
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 0;
+}
+
 .calendar-day:first-of-type,
 .calendar-day:last-of-type {
   margin-right: 0;

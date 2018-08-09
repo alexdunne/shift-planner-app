@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import startOfToday from "date-fns/start_of_today";
 
 import AppHeader from "./components/AppHeader";
 import {
@@ -18,6 +19,7 @@ class App extends Component {
 
   state = {
     locked: true,
+    todayTimestamp: startOfToday().getTime(),
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear(),
     dayHeaders: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
@@ -102,7 +104,15 @@ class App extends Component {
   };
 
   render() {
-    const { locked, shifts, shiftTypes, month, year, dayHeaders } = this.state;
+    const {
+      locked,
+      shifts,
+      shiftTypes,
+      month,
+      year,
+      dayHeaders,
+      todayTimestamp
+    } = this.state;
 
     return (
       <main className="app">
@@ -163,6 +173,10 @@ class App extends Component {
                     <CalendarDay
                       date={date}
                       backgroundColor={shiftType && shiftType.color}
+                      isToday={
+                        // Need to return false here otherwise the prop will be given `null`
+                        date && date.getTime() === todayTimestamp ? true : false
+                      }
                       onClick={() => !locked && this.handleDayClicked(date)}
                     />
                   );
