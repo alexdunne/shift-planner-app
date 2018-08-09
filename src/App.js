@@ -27,12 +27,12 @@ class App extends Component {
         1: {
           displayName: "Day shift",
           reference: "day_shift",
-          color: "#9e9e9e"
+          color: "#7D8C8D"
         },
         2: {
           displayName: "Night shift",
           reference: "night_shift",
-          color: "#FFC107"
+          color: "#E8BE3D"
         },
         3: {
           displayName: "Holiday",
@@ -42,7 +42,7 @@ class App extends Component {
         4: {
           displayName: "Study day",
           reference: "study_day",
-          color: "#00BCD4"
+          color: "#2196F3"
         }
       },
       allIds: [1, 2, 3, 4]
