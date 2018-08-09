@@ -8,6 +8,7 @@ import {
   MonthPicker,
   YearPicker
 } from "./components/Calendar";
+import CalendarLockToggle from "./components/CalendarLockToggle";
 import { Container, Row, Col } from "./components/Grid";
 import ShiftTypeIndicator from "./components/ShiftTypeIndicator";
 
@@ -64,7 +65,7 @@ class App extends Component {
     }
   }
 
-  handleLockedStatusChanged = () => {
+  handleToggleLock = () => {
     this.setState({ locked: !this.state.locked }, () => {
       localStorage.setItem(App.LOCKED_STORAGE_KEY, this.state.locked);
     });
@@ -116,75 +117,83 @@ class App extends Component {
 
     return (
       <main className="app">
-        <AppHeader
-          locked={locked}
-          onToggleLocked={this.handleLockedStatusChanged}
-        />
-        <Container className="calendar app-container">
-          <Row className="mb-2">
-            {shiftTypes.allIds
-              .map(id => ({ id, ...shiftTypes.byId[id] }))
-              .map(shiftType => (
-                <Col key={shiftType.id} span={6} className="mb-2">
-                  <ShiftTypeIndicator
-                    displayName={shiftType.displayName}
-                    color={shiftType.color}
-                  />
-                </Col>
-              ))}
-
-            <Col span={6} />
-          </Row>
-
-          <Row className="mb-4">
-            <Col span={6}>
-              <MonthPicker
-                onChange={({ value }) => {
-                  this.setState({ month: value });
-                }}
-                value={month}
-              />
-            </Col>
-
-            <Col span={6}>
-              <YearPicker
-                onChange={({ value }) => {
-                  this.setState({ year: value });
-                }}
-                value={year}
-              />
-            </Col>
-          </Row>
-
-          <Row className="mb-3">
-            {dayHeaders.map(day => <Col key={day}>{day}</Col>)}
-          </Row>
-
-          <Row>
-            <Col className="pl-1 pr-1">
-              <Overview
-                month={month}
-                year={year}
-                renderDay={({ date }) => {
-                  const shift = date ? shifts[date.getTime()] : null;
-                  const shiftType = shift ? shiftTypes.byId[shift.type] : null;
-
-                  return (
-                    <CalendarDay
-                      date={date}
-                      backgroundColor={shiftType && shiftType.color}
-                      isToday={
-                        // Need to return false here otherwise the prop will be given `null`
-                        date && date.getTime() === todayTimestamp ? true : false
-                      }
-                      onClick={() => !locked && this.handleDayClicked(date)}
+        <section>
+          <AppHeader
+            locked={locked}
+            onToggleLocked={this.handleLockedStatusChanged}
+          />
+          <Container className="calendar app-container">
+            <Row className="mb-2">
+              {shiftTypes.allIds
+                .map(id => ({ id, ...shiftTypes.byId[id] }))
+                .map(shiftType => (
+                  <Col key={shiftType.id} span={6} className="mb-2">
+                    <ShiftTypeIndicator
+                      displayName={shiftType.displayName}
+                      color={shiftType.color}
                     />
-                  );
-                }}
-              />
-            </Col>
-          </Row>
-        </Container>
+                  </Col>
+                ))}
+
+              <Col span={6} />
+            </Row>
+
+            <Row className="mb-4">
+              <Col span={6}>
+                <MonthPicker
+                  onChange={({ value }) => {
+                    this.setState({ month: value });
+                  }}
+                  value={month}
+                />
+              </Col>
+
+              <Col span={6}>
+                <YearPicker
+                  onChange={({ value }) => {
+                    this.setState({ year: value });
+                  }}
+                  value={year}
+                />
+              </Col>
+            </Row>
+
+            <Row className="mb-3">
+              {dayHeaders.map(day => <Col key={day}>{day}</Col>)}
+            </Row>
+
+            <Row>
+              <Col className="pl-1 pr-1">
+                <Overview
+                  month={month}
+                  year={year}
+                  renderDay={({ date }) => {
+                    const shift = date ? shifts[date.getTime()] : null;
+                    const shiftType = shift
+                      ? shiftTypes.byId[shift.type]
+                      : null;
+
+                    return (
+                      <CalendarDay
+                        date={date}
+                        backgroundColor={shiftType && shiftType.color}
+                        isToday={
+                          // Need to return false here otherwise the prop will be given `null`
+                          date && date.getTime() === todayTimestamp
+                            ? true
+                            : false
+                        }
+                        onClick={() => !locked && this.handleDayClicked(date)}
+                      />
+                    );
+                  }}
+                />
+              </Col>
+            </Row>
+          </Container>
+        </section>
+
+        <CalendarLockToggle locked={locked} onToggle={this.handleToggleLock} />
       </main>
     );
   }

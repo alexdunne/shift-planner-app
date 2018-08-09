@@ -15,7 +15,7 @@ const AppHeader = ({ locked, onToggleLocked }) => (
             <Icon
               name={locked ? "LockedLock" : "Edit"}
               size="xs"
-              backgroundColor={locked ? "#F44336" : "#4CAF50"}
+              backgroundColor={locked ? "#E91E63" : "#4CAF50"}
               iconColour="#FFFFFF"
               onPress={onToggleLocked}
             />
