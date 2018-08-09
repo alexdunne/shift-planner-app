@@ -29,6 +29,7 @@ const AppHeader = ({ locked, onToggleLocked }) => (
                 href="https://github.com/alexdunne/shift-planner-app"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Link to the shift planner github repository"
               >
                 <Icon
                   name="Link"
