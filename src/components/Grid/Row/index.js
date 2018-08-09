@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
+import "./index.css";
+
 const Row = ({ children, alignItems, justifyContent, className }) => {
   const classes = classnames([
     "row",

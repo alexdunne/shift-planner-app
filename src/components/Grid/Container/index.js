@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import "./index.css";
+
 const Container = ({ children, fluid, className }) => {
   if (process.env.NODE_ENV === "development") {
     React.Children.forEach(children, (child, index) => {
