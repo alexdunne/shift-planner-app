@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./index.css";
 
 const ShiftTypeIndicator = ({ displayName, color }) => (
-  <div style={{ color }} className="shift-type-indicator">
+  <div style={{ backgroundColor: color }} className="shift-type-indicator">
     {displayName}
   </div>
 );

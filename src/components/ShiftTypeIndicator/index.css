@@ -1,2 +1,8 @@
 .shift-type-indicator {
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  border-radius: 4px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

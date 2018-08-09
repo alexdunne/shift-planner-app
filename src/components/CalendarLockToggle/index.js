@@ -6,7 +6,7 @@ import "./index.css";
 const CalendarLockToggle = ({ locked, onToggle }) => (
   <button
     className="calendar-lock-toggle ripple"
-    style={{ backgroundColor: locked ? "#E91E63" : "#4CAF50" }}
+    style={{ backgroundColor: locked ? "#E4165C" : "#38843D" }}
     onClick={onToggle}
   >
     {locked ? "Unlock" : "Editing"}
