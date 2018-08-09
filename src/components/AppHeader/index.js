@@ -21,7 +21,7 @@ const AppHeader = ({ locked, onToggleLocked }) => (
             />
           }
         </Col>
-        <Col span={8}>{<div className="text-center">Shift planner</div>}</Col>
+        <Col span={8}>{<div className="text-center">Shift Planner</div>}</Col>
         <Col span={2}>
           {
             <div className="float-right">
