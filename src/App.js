@@ -118,10 +118,7 @@ class App extends Component {
     return (
       <main className="app">
         <section>
-          <AppHeader
-            locked={locked}
-            onToggleLocked={this.handleLockedStatusChanged}
-          />
+          <AppHeader locked={locked} onToggleLocked={this.handleToggleLock} />
           <Container className="calendar app-container">
             <Row className="mb-2">
               {shiftTypes.allIds
