@@ -19,3 +19,12 @@
   justify-content: center;
   z-index: 2;
 }
+
+.shift-type-indicator__picker-overlay {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}

@@ -20,9 +20,12 @@ const ShiftTypeIndicator = ({
 
     {isPicking && (
       <div className="shift-type-indicator__picker-container">
+        <div className="shift-type-indicator__picker-overlay" />
+
         <SwatchesPicker
           color={color}
-          height="400px"
+          width="372px"
+          height="65vh"
           onChangeComplete={onColorChanged}
         />
       </div>
