@@ -49,7 +49,8 @@ class App extends Component {
           color: "#FF9800"
         }
       },
-      allIds: [1, 2, 3, 4]
+      allIds: [1, 2, 3, 4],
+      pickerSelected: null
     }
   };
 
@@ -121,7 +122,8 @@ class App extends Component {
               ...this.state.shiftTypes.byId[id],
               color
             }
-          }
+          },
+          pickerSelected: null
         }
       },
       () => {
@@ -157,7 +159,16 @@ class App extends Component {
                     <ShiftTypeIndicator
                       displayName={shiftType.displayName}
                       color={shiftType.color}
-                      onColorChange={color =>
+                      isPicking={shiftType.id === shiftTypes.pickerSelected}
+                      onPickerClicked={() => {
+                        this.setState({
+                          shiftTypes: {
+                            ...shiftTypes,
+                            pickerSelected: shiftType.id
+                          }
+                        });
+                      }}
+                      onColorChanged={color =>
                         this.handleShiftTypeColorChange(shiftType.id, color.hex)
                       }
                     />

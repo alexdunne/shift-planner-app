@@ -9,8 +9,13 @@
 }
 
 .shift-type-indicator__picker-container {
+  display: flex;
   position: absolute;
-  top: 45px;
-  left: 15px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   z-index: 2;
 }

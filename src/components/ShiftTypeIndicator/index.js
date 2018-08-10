@@ -1,42 +1,41 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { TwitterPicker } from "react-color";
+import SwatchesPicker from "react-color/lib/Swatches";
 
 import "./index.css";
 
-class ShiftTypeIndicator extends React.Component {
-  state = {
-    showColorPicker: false
-  };
+const ShiftTypeIndicator = ({
+  displayName,
+  color,
+  isPicking,
+  onPickerClicked,
+  onColorChanged
+}) => (
+  <div
+    style={{ backgroundColor: color }}
+    className="shift-type-indicator"
+    onClick={onPickerClicked}
+  >
+    {displayName}
 
-  handleToggleColourPicker;
-
-  render() {
-    const { displayName, color, onColorChange } = this.props;
-    const { showColorPicker } = this.state;
-
-    return (
-      <div
-        style={{ backgroundColor: color }}
-        className="shift-type-indicator"
-        onClick={() => this.setState({ showColorPicker: !showColorPicker })}
-      >
-        {displayName}
-
-        {showColorPicker && (
-          <div className="shift-type-indicator__picker-container">
-            <TwitterPicker color={color} onChangeComplete={onColorChange} />
-          </div>
-        )}
+    {isPicking && (
+      <div className="shift-type-indicator__picker-container">
+        <SwatchesPicker
+          color={color}
+          height="400px"
+          onChangeComplete={onColorChanged}
+        />
       </div>
-    );
-  }
-}
+    )}
+  </div>
+);
 
 ShiftTypeIndicator.propTypes = {
   displayName: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  onColorChange: PropTypes.func.isRequired
+  isPicking: PropTypes.bool.isRequired,
+  onPickerClicked: PropTypes.func.isRequired,
+  onColorChanged: PropTypes.func.isRequired
 };
 
 export default ShiftTypeIndicator;
