@@ -59,6 +59,7 @@ class ShiftTypeIndicator extends React.Component {
               <div className="shift-type-indicator__config-container">
                 <input
                   type="text"
+                  placeholder="Shift type name"
                   className="shift-type-indicator__name-input"
                   value={newDisplayName}
                   onChange={this.handleDisplayNameChange}

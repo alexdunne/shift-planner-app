@@ -24,6 +24,8 @@
 .shift-type-indicator__config-container {
   width: 372px;
   z-index: 2;
+  background-color: #ffffff;
+  border-radius: 2px;
 }
 
 .shift-type-indicator__name-input {
@@ -40,7 +42,7 @@
   color: #495057;
   background-color: #fff;
   border-color: #80bdff;
-  outline: 0;
+  outline: none;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
@@ -73,4 +75,9 @@
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Reset the box shadow of the library class */
+.swatches-picker div {
+  box-shadow: none !important;
 }
