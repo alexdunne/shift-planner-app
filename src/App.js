@@ -16,6 +16,7 @@ import "./App.css";
 
 class App extends Component {
   static SHIFT_STORAGE_KEY = "SHIFT_STORAGE_KEY";
+  static SHIFT_TYPES_STORAGE_KEY = "SHIFT_TYPES_STORAGE_KEY";
   static LOCKED_STORAGE_KEY = "LOCKED_STORAGE_KEY";
 
   state = {
@@ -55,6 +56,7 @@ class App extends Component {
   componentDidMount() {
     const locked = localStorage.getItem(App.LOCKED_STORAGE_KEY);
     const shifts = localStorage.getItem(App.SHIFT_STORAGE_KEY);
+    const shiftTypes = localStorage.getItem(App.SHIFT_TYPES_STORAGE_KEY);
 
     if (locked !== null && locked !== undefined) {
       this.setState({ locked: JSON.parse(locked) });
@@ -62,6 +64,10 @@ class App extends Component {
 
     if (shifts) {
       this.setState({ shifts: JSON.parse(shifts) });
+    }
+
+    if (shiftTypes) {
+      this.setState({ shiftTypes: JSON.parse(shiftTypes) });
     }
   }
 
@@ -104,6 +110,29 @@ class App extends Component {
     );
   };
 
+  handleShiftTypeColorChange = (id, color) => {
+    this.setState(
+      {
+        shiftTypes: {
+          ...this.state.shiftTypes,
+          byId: {
+            ...this.state.shiftTypes.byId,
+            [id]: {
+              ...this.state.shiftTypes.byId[id],
+              color
+            }
+          }
+        }
+      },
+      () => {
+        localStorage.setItem(
+          App.SHIFT_TYPES_STORAGE_KEY,
+          JSON.stringify(this.state.shiftTypes)
+        );
+      }
+    );
+  };
+
   render() {
     const {
       locked,
@@ -128,6 +157,9 @@ class App extends Component {
                     <ShiftTypeIndicator
                       displayName={shiftType.displayName}
                       color={shiftType.color}
+                      onColorChange={color =>
+                        this.handleShiftTypeColorChange(shiftType.id, color.hex)
+                      }
                     />
                   </Col>
                 ))}

@@ -7,3 +7,10 @@
   padding-bottom: 5px;
   user-select: none;
 }
+
+.shift-type-indicator__picker-container {
+  position: absolute;
+  top: 45px;
+  left: 15px;
+  z-index: 2;
+}
