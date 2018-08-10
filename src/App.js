@@ -111,7 +111,7 @@ class App extends Component {
     );
   };
 
-  handleShiftTypeColorChange = (id, color) => {
+  handleShiftTypeChange = (id, config) => {
     this.setState(
       {
         shiftTypes: {
@@ -120,7 +120,7 @@ class App extends Component {
             ...this.state.shiftTypes.byId,
             [id]: {
               ...this.state.shiftTypes.byId[id],
-              color
+              ...config
             }
           },
           pickerSelected: null
@@ -159,8 +159,8 @@ class App extends Component {
                     <ShiftTypeIndicator
                       displayName={shiftType.displayName}
                       color={shiftType.color}
-                      isPicking={shiftType.id === shiftTypes.pickerSelected}
-                      onPickerClicked={() => {
+                      isEditing={shiftType.id === shiftTypes.pickerSelected}
+                      onStartEditing={() => {
                         this.setState({
                           shiftTypes: {
                             ...shiftTypes,
@@ -168,8 +168,8 @@ class App extends Component {
                           }
                         });
                       }}
-                      onColorChanged={color =>
-                        this.handleShiftTypeColorChange(shiftType.id, color.hex)
+                      onSave={config =>
+                        this.handleShiftTypeChange(shiftType.id, config)
                       }
                     />
                   </Col>
