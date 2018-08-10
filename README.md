@@ -10,6 +10,10 @@ You can then start the project using `yarn start`. This is will start the webpac
 
 You can view the UI components in storybook format by using `yarn storybook`.
 
+## Webpack bundle analyser
+
+To run the analyser use `yarn bundle-analyse`
+
 ### Todo
 
 - Add https://fontawesome.com/license attribution to the app

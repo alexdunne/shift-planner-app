@@ -18,11 +18,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "bundle-analyse": "node build.js"
   },
   "devDependencies": {
     "@dump247/storybook-state": "^1.5.0",
     "@storybook/react": "^3.4.8",
-    "babel-core": "^6.26.3"
+    "babel-core": "^6.26.3",
+    "webpack-bundle-analyzer": "^2.13.1"
   }
 }
