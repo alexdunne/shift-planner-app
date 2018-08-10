@@ -32,7 +32,7 @@ const AppHeader = ({ locked, onToggleLocked }) => (
                 aria-label="Link to the shift planner github repository"
               >
                 <Icon
-                  name="Link"
+                  name="Github"
                   size="xs"
                   backgroundColor="#03A9F4"
                   iconColour="#FFFFFF"

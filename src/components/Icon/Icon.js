@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 const availableIcons = {
   Edit: require("./Edit").default,
+  Github: require("./Github").default,
   Hamburger: require("./Hamburger").default,
   LockedLock: require("./LockedLock").default,
   Link: require("./Link").default,
@@ -64,7 +65,8 @@ Icon.propTypes = {
     "Hamburger",
     "LockedLock",
     "UnlockedLock",
-    "Link"
+    "Link",
+    "Github"
   ]).isRequired,
   iconColour: PropTypes.string,
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
