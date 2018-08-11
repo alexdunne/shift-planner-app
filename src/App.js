@@ -173,8 +173,6 @@ class App extends Component {
                     />
                   </Col>
                 ))}
-
-              <Col span={6} />
             </Row>
 
             <Row className="mb-4">
