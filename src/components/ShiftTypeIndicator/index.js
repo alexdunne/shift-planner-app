@@ -54,7 +54,10 @@ class ShiftTypeIndicator extends React.Component {
         <div>
           {isEditing && (
             <div className="shift-type-indicator__container">
-              <div className="shift-type-indicator__overlay" />
+              <div
+                className="shift-type-indicator__overlay"
+                onClick={this.handleSavePressed}
+              />
 
               <div className="shift-type-indicator__config-container">
                 <input
