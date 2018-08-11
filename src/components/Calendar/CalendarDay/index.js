@@ -21,10 +21,14 @@ const CalendarDay = ({ date, backgroundColor, isToday, onClick }) => {
   );
 };
 
+CalendarDay.defaultProps = {
+  isToday: false
+};
+
 CalendarDay.propTypes = {
   date: PropTypes.instanceOf(Date),
   backgroundColor: PropTypes.string,
-  isToday: PropTypes.bool.isRequired,
+  isToday: PropTypes.bool,
   onClick: PropTypes.func.isRequired
 };
 

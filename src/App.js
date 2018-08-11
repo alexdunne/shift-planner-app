@@ -11,6 +11,7 @@ import {
 import CalendarLockToggle from "./components/CalendarLockToggle";
 import { Container, Row, Col } from "./components/Grid";
 import ShiftTypeIndicator from "./components/ShiftTypeIndicator";
+import ShiftTypeEditor from "./components/ShiftTypeEditor";
 
 import "./App.css";
 
@@ -49,9 +50,9 @@ class App extends Component {
           color: "#FF9800"
         }
       },
-      allIds: [1, 2, 3, 4],
-      pickerSelected: null
-    }
+      allIds: [1, 2, 3, 4]
+    },
+    editingShiftTypeId: null
   };
 
   componentDidMount() {
@@ -111,6 +112,10 @@ class App extends Component {
     );
   };
 
+  handleShiftTypeClicked = id => {
+    this.setState({ editingShiftTypeId: id });
+  };
+
   handleShiftTypeChange = (id, config) => {
     this.setState(
       {
@@ -122,9 +127,9 @@ class App extends Component {
               ...this.state.shiftTypes.byId[id],
               ...config
             }
-          },
-          pickerSelected: null
-        }
+          }
+        },
+        editingShiftTypeId: null
       },
       () => {
         localStorage.setItem(
@@ -143,8 +148,11 @@ class App extends Component {
       month,
       year,
       dayHeaders,
-      todayTimestamp
+      todayTimestamp,
+      editingShiftTypeId
     } = this.state;
+
+    const editingShiftType = shiftTypes.byId[editingShiftTypeId];
 
     return (
       <main className="app">
@@ -159,17 +167,8 @@ class App extends Component {
                     <ShiftTypeIndicator
                       displayName={shiftType.displayName}
                       color={shiftType.color}
-                      isEditing={shiftType.id === shiftTypes.pickerSelected}
-                      onStartEditing={() => {
-                        this.setState({
-                          shiftTypes: {
-                            ...shiftTypes,
-                            pickerSelected: shiftType.id
-                          }
-                        });
-                      }}
-                      onSave={config =>
-                        this.handleShiftTypeChange(shiftType.id, config)
+                      onStartEditing={() =>
+                        this.handleShiftTypeClicked(shiftType.id)
                       }
                     />
                   </Col>
@@ -217,12 +216,7 @@ class App extends Component {
                       <CalendarDay
                         date={date}
                         backgroundColor={shiftType && shiftType.color}
-                        isToday={
-                          // Need to return false here otherwise the prop will be given `null`
-                          date && date.getTime() === todayTimestamp
-                            ? true
-                            : false
-                        }
+                        isToday={date && date.getTime() === todayTimestamp}
                         onClick={() => !locked && this.handleDayClicked(date)}
                       />
                     );
@@ -234,6 +228,17 @@ class App extends Component {
         </section>
 
         <CalendarLockToggle locked={locked} onToggle={this.handleToggleLock} />
+
+        {editingShiftTypeId && (
+          <ShiftTypeEditor
+            color={editingShiftType.color}
+            displayName={editingShiftType.displayName}
+            onSave={config =>
+              this.handleShiftTypeChange(editingShiftTypeId, config)
+            }
+            onCancel={() => this.setState({ editingShiftTypeId: null })}
+          />
+        )}
       </main>
     );
   }
