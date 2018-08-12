@@ -45,10 +45,6 @@ class App extends Component {
     }, {});
   });
 
-  handleToggleLock = () => {
-    this.setState({ locked: !this.state.locked });
-  };
-
   handleDayClicked = (shift, date) => {
     const { shiftTypesList } = this.props;
 
@@ -90,7 +86,7 @@ class App extends Component {
     return (
       <main className="app">
         <section>
-          <AppHeader locked={locked} onToggleLocked={this.handleToggleLock} />
+          <AppHeader />
 
           <Container className="calendar app-container">
             <Row className="mb-2">
@@ -151,7 +147,12 @@ class App extends Component {
           </Container>
         </section>
 
-        <CalendarLockToggle locked={locked} onToggle={this.handleToggleLock} />
+        <CalendarLockToggle
+          locked={locked}
+          onToggle={() => {
+            this.setState({ locked: !this.state.locked });
+          }}
+        />
 
         {editingShiftTypeId && (
           <ShiftTypeEditor
