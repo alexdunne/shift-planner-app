@@ -14,26 +14,23 @@ import { addShift, updateShift, removeShift } from "./features/shifts/actions";
 import { getShiftsList } from "./features/shifts/selectors";
 import { updateShiftType } from "./features/shiftTypes/actions";
 import { getShiftTypesList, getShiftTypesById } from "./features/shiftTypes/selector";
-import { SHIFT_STORAGE_KEY } from "./utils/constants";
 
 import "./App.css";
 
 class App extends Component {
-  state = {
-    locked: true,
-    todayTimestamp: startOfToday().getTime(),
-    month: new Date().getMonth() + 1,
-    year: new Date().getFullYear(),
-    dayHeaders: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    editingShiftTypeId: null
-  };
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
-    const shifts = localStorage.getItem(SHIFT_STORAGE_KEY);
+    const now = startOfToday();
 
-    if (shifts) {
-      this.setState({ shifts: JSON.parse(shifts) });
-    }
+    this.state = {
+      locked: true,
+      todayTimestamp: now.getTime(),
+      month: now.getMonth() + 1,
+      year: now.getFullYear(),
+      dayHeaders: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      editingShiftTypeId: null
+    };
   }
 
   getShiftsForMonthAndYear = memoizeOne((shiftsList, month, year) => {
