@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import { configureStore } from "./store";
-import { SHIFT_STORAGE_KEY, SHIFT_TYPES_STORAGE_KEY } from "./utils/constants";
+import { SHIFT_TYPES_STORAGE_KEY } from "./utils/constants";
 
 import "./index.css";
 import "./flex.css";
@@ -44,15 +45,13 @@ const shiftTypes = localStorage.getItem(SHIFT_TYPES_STORAGE_KEY)
       ]
     };
 
-const shifts = localStorage.getItem(SHIFT_STORAGE_KEY)
-  ? JSON.parse(localStorage.getItem(SHIFT_STORAGE_KEY))
-  : { byId: {}, allIds: [] };
-
-const store = configureStore({ shifts, shiftTypes });
+const { store, persistor } = configureStore({ shiftTypes });
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );
