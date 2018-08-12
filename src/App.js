@@ -25,7 +25,6 @@ class App extends Component {
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear(),
     dayHeaders: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    shifts: {},
     editingShiftTypeId: null
   };
 
@@ -84,11 +83,11 @@ class App extends Component {
   };
 
   render() {
-    const { locked, month, year, dayHeaders, todayTimestamp, editingShiftTypeId } = this.state;
+    const { locked, month, year, todayTimestamp, editingShiftTypeId } = this.state;
     const { shiftsList, shiftTypesList, shiftTypesById } = this.props;
 
+    const dayHeaders = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     const shifts = this.getShiftsForMonthAndYear(shiftsList, month, year);
-
     const editingShiftType = shiftTypesById[editingShiftTypeId];
 
     return (
