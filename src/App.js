@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import memoizeOne from "memoize-one";
 
 import AppHeader from "./components/AppHeader";
-import { Overview, CalendarDay, MonthPicker, YearPicker } from "./components/Calendar";
+import { MonthOverview, CalendarDay, MonthPicker, YearPicker } from "./components/Calendar";
 import CalendarLockToggle from "./components/CalendarLockToggle";
 import { Container, Row, Col } from "./components/Grid";
 import ShiftTypeIndicator from "./components/ShiftTypeIndicator";
@@ -132,7 +132,7 @@ class App extends Component {
 
             <Row>
               <Col className="px-1">
-                <Overview
+                <MonthOverview
                   month={month}
                   year={year}
                   renderDay={({ date }) => {

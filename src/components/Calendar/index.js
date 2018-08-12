@@ -1,6 +1,6 @@
-import Overview from "./Overview";
+import MonthOverview from "./MonthOverview";
 import CalendarDay from "./CalendarDay";
 import MonthPicker from "./MonthPicker";
 import YearPicker from "./YearPicker";
 
-export { Overview, CalendarDay, MonthPicker, YearPicker };
+export { MonthOverview, CalendarDay, MonthPicker, YearPicker };

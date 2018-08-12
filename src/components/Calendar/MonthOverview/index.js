@@ -39,10 +39,7 @@ const getWeeks = memoizeOne((month, year) => {
   days.forEach(day => {
     week.push(day);
 
-    if (
-      isEqual(day, lastDayOfWeek(day, { weekStartsOn: 1 })) ||
-      isLastDayOfMonth(day)
-    ) {
+    if (isEqual(day, lastDayOfWeek(day, { weekStartsOn: 1 })) || isLastDayOfMonth(day)) {
       if (isLastDayOfMonth(day)) {
         while (week.length < 7) {
           week.push(null);
@@ -57,7 +54,7 @@ const getWeeks = memoizeOne((month, year) => {
   return weeks;
 });
 
-const Overview = ({ month, year, renderDay }) => {
+const MonthOverview = ({ month, year, renderDay }) => {
   if (!month || !year) {
     console.warn("Props month and year are both required");
     return null;
@@ -66,14 +63,12 @@ const Overview = ({ month, year, renderDay }) => {
   const weeks = getWeeks(month, year);
 
   return (
-    <section className="overview">
+    <section>
       <Container>
         {weeks.map((week, index) => (
           <Row key={index} className="mb-1">
             {week.map((day, index) => (
-              <React.Fragment key={index}>
-                {renderDay({ date: day })}
-              </React.Fragment>
+              <React.Fragment key={index}>{renderDay({ date: day })}</React.Fragment>
             ))}
           </Row>
         ))}
@@ -82,14 +77,14 @@ const Overview = ({ month, year, renderDay }) => {
   );
 };
 
-Overview.defaultProps = {
+MonthOverview.defaultProps = {
   renderDay: ({ date }) => <Col>{date ? format(date, "D") : null}</Col>
 };
 
-Overview.propTypes = {
+MonthOverview.propTypes = {
   month: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]).isRequired,
   year: PropTypes.number.isRequired,
   renderDay: PropTypes.func
 };
 
-export default Overview;
+export default MonthOverview;
