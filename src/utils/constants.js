@@ -1,0 +1,3 @@
+// Storage
+export const SHIFT_STORAGE_KEY = "SHIFT_STORAGE_KEY";
+export const SHIFT_TYPES_STORAGE_KEY = "SHIFT_TYPES_STORAGE_KEY";

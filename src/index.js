@@ -1,12 +1,59 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
+import { configureStore } from "./store";
+import { SHIFT_STORAGE_KEY, SHIFT_TYPES_STORAGE_KEY } from "./utils/constants";
 
 import "./index.css";
 import "./flex.css";
 import "./spacing.css";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const shiftTypes = localStorage.getItem(SHIFT_TYPES_STORAGE_KEY)
+  ? JSON.parse(localStorage.getItem(SHIFT_TYPES_STORAGE_KEY))
+  : {
+      byId: {
+        "0d4bdc27-fcb0-469d-b398-af68d6da02fa": {
+          displayName: "Day shift",
+          reference: "day_shift",
+          color: "#687878"
+        },
+        "19b6879d-40a8-40dc-9cb4-a35f6f2959a8": {
+          displayName: "Night shift",
+          reference: "night_shift",
+          color: "#DD435B"
+        },
+        "99dead20-a9e1-4c2b-be3d-763e6e5395c8": {
+          displayName: "Holiday",
+          reference: "holiday",
+          color: "#2196F3"
+        },
+        "60789850-c73f-4f70-ac37-3aece381e96f": {
+          displayName: "Study day",
+          reference: "study_day",
+          color: "#FF9800"
+        }
+      },
+      allIds: [
+        "0d4bdc27-fcb0-469d-b398-af68d6da02fa",
+        "19b6879d-40a8-40dc-9cb4-a35f6f2959a8",
+        "99dead20-a9e1-4c2b-be3d-763e6e5395c8",
+        "60789850-c73f-4f70-ac37-3aece381e96f"
+      ]
+    };
+
+const shifts = localStorage.getItem(SHIFT_STORAGE_KEY)
+  ? JSON.parse(localStorage.getItem(SHIFT_STORAGE_KEY))
+  : { byId: {}, allIds: [] };
+
+const store = configureStore({ shifts, shiftTypes });
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
 registerServiceWorker();

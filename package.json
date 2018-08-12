@@ -5,13 +5,18 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "date-fns": "^1.29.0",
+    "immer": "^1.5.0",
+    "lodash": "^4.17.10",
     "memoize-one": "^4.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-color": "^2.14.1",
     "react-dom": "^16.4.1",
     "react-dropdown": "^1.5.0",
-    "react-scripts": "1.1.4"
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.4",
+    "redux": "^4.0.0",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,6 +30,7 @@
     "@dump247/storybook-state": "^1.5.0",
     "@storybook/react": "^3.4.8",
     "babel-core": "^6.26.3",
+    "redux-logger": "^3.0.6",
     "webpack-bundle-analyzer": "^2.13.1"
   }
 }
