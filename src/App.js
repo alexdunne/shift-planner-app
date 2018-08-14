@@ -3,12 +3,12 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+import AppHeader from "components/AppHeader";
 import OverviewScreen from "screens/OverviewScreen";
+import ShiftTypesScreen from "screens/ShiftTypesScreen";
 import { configureStore } from "store";
 
-import "./index.css";
-import "./flex.css";
-import "./spacing.css";
+import "./App.css";
 
 const shiftTypes = {
   byId: {
@@ -47,7 +47,13 @@ const App = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <Router>
-        <Route exact path="/" component={OverviewScreen} />
+        <main className="fill-height">
+          <AppHeader />
+          <div className="app-header-offset">
+            <Route exact path="/" component={OverviewScreen} />
+            <Route path="/shift-types" component={ShiftTypesScreen} />
+          </div>
+        </main>
       </Router>
     </PersistGate>
   </Provider>

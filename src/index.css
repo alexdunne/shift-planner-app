@@ -35,6 +35,10 @@ body {
   width: 100%;
 }
 
+.fill-height {
+  height: 100%;
+}
+
 .text-center {
   text-align: center;
 }

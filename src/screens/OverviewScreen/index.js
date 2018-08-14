@@ -4,7 +4,6 @@ import startOfToday from "date-fns/start_of_today";
 import { connect } from "react-redux";
 import memoizeOne from "memoize-one";
 
-import AppHeader from "components/AppHeader";
 import { MonthOverview, CalendarDay, MonthPicker, YearPicker } from "components/Calendar";
 import CalendarLockToggle from "components/CalendarLockToggle";
 import { Container, Row, Col } from "components/Grid";
@@ -84,10 +83,8 @@ class OverviewScreen extends Component {
     const editingShiftType = shiftTypesById[editingShiftTypeId];
 
     return (
-      <main className="overview-screen">
-        <section>
-          <AppHeader />
-
+      <React.Fragment>
+        <section className="overview-screen fill-height">
           <Container className="calendar overview-screen-container">
             <Row className="mb-2">
               {shiftTypesList.map(shiftType => (
@@ -121,7 +118,11 @@ class OverviewScreen extends Component {
               </Col>
             </Row>
 
-            <Row className="mb-3">{dayHeaders.map(day => <Col key={day}>{day}</Col>)}</Row>
+            <Row className="mb-3">
+              {dayHeaders.map(day => (
+                <Col key={day}>{day}</Col>
+              ))}
+            </Row>
 
             <Row>
               <Col className="px-1">
@@ -145,14 +146,14 @@ class OverviewScreen extends Component {
               </Col>
             </Row>
           </Container>
-        </section>
 
-        <CalendarLockToggle
-          locked={locked}
-          onToggle={() => {
-            this.setState({ locked: !this.state.locked });
-          }}
-        />
+          <CalendarLockToggle
+            locked={locked}
+            onToggle={() => {
+              this.setState({ locked: !this.state.locked });
+            }}
+          />
+        </section>
 
         {editingShiftTypeId && (
           <ShiftTypeEditor
@@ -165,7 +166,7 @@ class OverviewScreen extends Component {
             onCancel={() => this.setState({ editingShiftTypeId: null })}
           />
         )}
-      </main>
+      </React.Fragment>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Row, Col } from "components/Grid";
 import Icon from "components/Icon/Icon";
@@ -10,7 +11,9 @@ const AppHeader = () => (
     <div className="app-container">
       <Row alignItems="center">
         <Col span={2}>
-          <Icon name="Hamburger" size="xs" backgroundColor="#03A9F4" iconColour="#FFFFFF" />
+          <Link to="/shift-types">
+            <Icon name="Hamburger" size="xs" backgroundColor="#03A9F4" iconColour="#FFFFFF" />
+          </Link>
         </Col>
         <Col span={8}>{<div className="text-center">Shift Planner</div>}</Col>
         <Col span={2}>
