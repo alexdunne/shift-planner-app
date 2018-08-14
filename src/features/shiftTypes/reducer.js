@@ -1,6 +1,6 @@
 import produce from "immer";
 
-import { createReducer } from "../../utils/reducerUtils";
+import { createReducer } from "utils/reducerUtils";
 import { ADD_SHIFT_TYPE, REMOVE_SHIFT_TYPE, UPDATE_SHIFT_TYPE } from "./constants";
 
 const initialState = { byId: {}, allIds: [] };

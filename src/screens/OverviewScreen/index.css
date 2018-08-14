@@ -1,0 +1,19 @@
+.overview-screen {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #2e3e4f;
+  color: #ffffff;
+}
+
+.calendar {
+  text-align: center;
+  width: 100%;
+  padding: 30px 20px;
+}
+
+.overview-screen-container {
+  max-width: 800px;
+  margin: 0 auto;
+}

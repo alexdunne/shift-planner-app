@@ -1,7 +1,7 @@
 import uuid from "uuid";
 
 import { ADD_SHIFT, UPDATE_SHIFT, REMOVE_SHIFT } from "./constants";
-import { SHIFT_STORAGE_KEY } from "../../utils/constants";
+import { SHIFT_STORAGE_KEY } from "utils/constants";
 
 export const addShift = ({ date, shiftTypeId }) => ({
   type: ADD_SHIFT,

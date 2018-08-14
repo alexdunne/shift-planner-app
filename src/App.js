@@ -1,211 +1,56 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import startOfToday from "date-fns/start_of_today";
-import { connect } from "react-redux";
-import memoizeOne from "memoize-one";
+import React from "react";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import AppHeader from "./components/AppHeader";
-import { MonthOverview, CalendarDay, MonthPicker, YearPicker } from "./components/Calendar";
-import CalendarLockToggle from "./components/CalendarLockToggle";
-import { Container, Row, Col } from "./components/Grid";
-import ShiftTypeIndicator from "./components/ShiftTypeIndicator";
-import ShiftTypeEditor from "./components/ShiftTypeEditor";
-import { addShift, updateShift, removeShift } from "./features/shifts/actions";
-import { getShiftsList } from "./features/shifts/selectors";
-import { updateShiftType } from "./features/shiftTypes/actions";
-import { getShiftTypesList, getShiftTypesById } from "./features/shiftTypes/selector";
+import OverviewScreen from "screens/OverviewScreen";
+import { configureStore } from "store";
 
-import "./App.css";
+import "./index.css";
+import "./flex.css";
+import "./spacing.css";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    const now = startOfToday();
-
-    this.state = {
-      locked: true,
-      todayTimestamp: now.getTime(),
-      month: now.getMonth() + 1,
-      year: now.getFullYear(),
-      dayHeaders: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-      editingShiftTypeId: null
-    };
-  }
-
-  getShiftsForMonthAndYear = memoizeOne((shiftsList, month, year) => {
-    return shiftsList.reduce((acc, shift) => {
-      const date = new Date(shift.timestamp);
-
-      if (date.getMonth() + 1 === month && date.getFullYear() === year) {
-        acc[shift.timestamp] = shift;
-      }
-
-      return acc;
-    }, {});
-  });
-
-  handleDayClicked = (shift, date) => {
-    const { shiftTypesList } = this.props;
-
-    if (shiftTypesList.length === 0) {
-      return;
+const shiftTypes = {
+  byId: {
+    "0d4bdc27-fcb0-469d-b398-af68d6da02fa": {
+      displayName: "Day shift",
+      reference: "day_shift",
+      color: "#687878"
+    },
+    "19b6879d-40a8-40dc-9cb4-a35f6f2959a8": {
+      displayName: "Night shift",
+      reference: "night_shift",
+      color: "#DD435B"
+    },
+    "99dead20-a9e1-4c2b-be3d-763e6e5395c8": {
+      displayName: "Holiday",
+      reference: "holiday",
+      color: "#2196F3"
+    },
+    "60789850-c73f-4f70-ac37-3aece381e96f": {
+      displayName: "Study day",
+      reference: "study_day",
+      color: "#FF9800"
     }
-
-    if (!shift) {
-      this.props.onAddShift({ date, shiftTypeId: shiftTypesList[0].id });
-      return;
-    }
-
-    const currentShiftTypeIndex = shiftTypesList.findIndex(
-      shiftType => shiftType.id === shift.shiftTypeId
-    );
-
-    if (currentShiftTypeIndex + 1 === shiftTypesList.length) {
-      this.props.onRemoveShift({ id: shift.id });
-      return;
-    }
-
-    const newShiftTypeIndex = currentShiftTypeIndex + 1;
-
-    this.props.onUpdateShift({
-      id: shift.id,
-      date,
-      shiftTypeId: shiftTypesList[newShiftTypeIndex].id
-    });
-  };
-
-  render() {
-    const { locked, month, year, todayTimestamp, editingShiftTypeId } = this.state;
-    const { shiftsList, shiftTypesList, shiftTypesById } = this.props;
-
-    const dayHeaders = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    const shifts = this.getShiftsForMonthAndYear(shiftsList, month, year);
-    const editingShiftType = shiftTypesById[editingShiftTypeId];
-
-    return (
-      <main className="app">
-        <section>
-          <AppHeader />
-
-          <Container className="calendar app-container">
-            <Row className="mb-2">
-              {shiftTypesList.map(shiftType => (
-                <Col key={shiftType.id} span={6} className="mb-2">
-                  <ShiftTypeIndicator
-                    displayName={shiftType.displayName}
-                    color={shiftType.color}
-                    onStartEditing={() => this.setState({ editingShiftTypeId: shiftType.id })}
-                  />
-                </Col>
-              ))}
-            </Row>
-
-            <Row className="mb-4">
-              <Col span={6}>
-                <MonthPicker
-                  onChange={({ value }) => {
-                    this.setState({ month: value });
-                  }}
-                  value={month}
-                />
-              </Col>
-
-              <Col span={6}>
-                <YearPicker
-                  onChange={({ value }) => {
-                    this.setState({ year: value });
-                  }}
-                  value={year}
-                />
-              </Col>
-            </Row>
-
-            <Row className="mb-3">{dayHeaders.map(day => <Col key={day}>{day}</Col>)}</Row>
-
-            <Row>
-              <Col className="px-1">
-                <MonthOverview
-                  month={month}
-                  year={year}
-                  renderDay={({ date }) => {
-                    const shift = date ? shifts[date.getTime()] : null;
-                    const shiftType = shift ? shiftTypesById[shift.shiftTypeId] : null;
-
-                    return (
-                      <CalendarDay
-                        date={date}
-                        backgroundColor={shiftType && shiftType.color}
-                        isToday={date && date.getTime() === todayTimestamp}
-                        onClick={() => !locked && this.handleDayClicked(shift, date)}
-                      />
-                    );
-                  }}
-                />
-              </Col>
-            </Row>
-          </Container>
-        </section>
-
-        <CalendarLockToggle
-          locked={locked}
-          onToggle={() => {
-            this.setState({ locked: !this.state.locked });
-          }}
-        />
-
-        {editingShiftTypeId && (
-          <ShiftTypeEditor
-            color={editingShiftType.color}
-            displayName={editingShiftType.displayName}
-            onSave={config => {
-              this.props.onUpdateShiftType({ id: editingShiftTypeId, config });
-              this.setState({ editingShiftTypeId: null });
-            }}
-            onCancel={() => this.setState({ editingShiftTypeId: null })}
-          />
-        )}
-      </main>
-    );
-  }
-}
-
-App.propTypes = {
-  shiftsList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      timestamp: PropTypes.number.isRequired,
-      shiftTypeId: PropTypes.string.isRequired
-    })
-  ),
-  shiftTypesList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      displayName: PropTypes.string.isRequired,
-      color: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  shiftTypesById: PropTypes.object.isRequired,
-  onAddShift: PropTypes.func.isRequired,
-  onUpdateShift: PropTypes.func.isRequired,
-  onRemoveShift: PropTypes.func.isRequired,
-  onUpdateShiftType: PropTypes.func.isRequired
+  },
+  allIds: [
+    "0d4bdc27-fcb0-469d-b398-af68d6da02fa",
+    "19b6879d-40a8-40dc-9cb4-a35f6f2959a8",
+    "99dead20-a9e1-4c2b-be3d-763e6e5395c8",
+    "60789850-c73f-4f70-ac37-3aece381e96f"
+  ]
 };
 
-const mapStateToProps = state => ({
-  shiftsList: getShiftsList(state),
-  shiftTypesList: getShiftTypesList(state),
-  shiftTypesById: getShiftTypesById(state)
-});
+const { store, persistor } = configureStore({ shiftTypes });
 
-const mapDispatchToProps = {
-  onAddShift: addShift,
-  onUpdateShift: updateShift,
-  onRemoveShift: removeShift,
-  onUpdateShiftType: updateShiftType
-};
+const App = () => (
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <Router>
+        <Route exact path="/" component={OverviewScreen} />
+      </Router>
+    </PersistGate>
+  </Provider>
+);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App;

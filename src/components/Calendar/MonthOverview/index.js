@@ -10,7 +10,7 @@ import isLastDayOfMonth from "date-fns/is_last_day_of_month";
 import isEqual from "date-fns/is_equal";
 import memoizeOne from "memoize-one";
 
-import { Container, Row, Col } from "../../Grid";
+import { Container, Row, Col } from "components/Grid";
 
 /**
  * Given a date, this function builds up a 2D array of each

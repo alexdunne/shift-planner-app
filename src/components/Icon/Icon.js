@@ -18,13 +18,7 @@ const SIZE_SCALE = {
   xl: 48
 };
 
-const Icon = ({
-  backgroundColor = null,
-  name = null,
-  iconColour = null,
-  size = "md",
-  onPress
-}) => {
+const Icon = ({ backgroundColor = null, name = null, iconColour = null, size = "md", onPress }) => {
   const containerStyles = {
     width: SIZE_SCALE[size],
     height: SIZE_SCALE[size],
@@ -60,14 +54,8 @@ const Icon = ({
 
 Icon.propTypes = {
   backgroundColor: PropTypes.string,
-  name: PropTypes.oneOf([
-    "Edit",
-    "Hamburger",
-    "LockedLock",
-    "UnlockedLock",
-    "Link",
-    "Github"
-  ]).isRequired,
+  name: PropTypes.oneOf(["Edit", "Hamburger", "LockedLock", "UnlockedLock", "Link", "Github"])
+    .isRequired,
   iconColour: PropTypes.string,
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
   onPress: PropTypes.func
