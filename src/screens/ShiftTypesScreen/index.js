@@ -6,7 +6,7 @@ import { Container, Row, Col } from "components/Grid";
 import Icon from "components/Icon/Icon";
 import ShiftTypeEditor from "components/ShiftTypeEditor";
 import ShiftTypeIndicator from "components/ShiftTypeIndicator";
-import { addShiftType, updateShiftType } from "features/shiftTypes/actions";
+import { addShiftType, updateShiftType, removeShiftType } from "features/shiftTypes/actions";
 import { getShiftTypesList, getShiftTypesById } from "features/shiftTypes/selector";
 
 import "./index.css";
@@ -41,7 +41,10 @@ class ShiftTypesScreen extends React.Component {
                       onStartEditing={() => this.setState({ editingShiftTypeId: shiftType.id })}
                     />
                   </div>
-                  <div className="shift-types-screen__delete">
+                  <div
+                    className="shift-types-screen__delete"
+                    onClick={() => this.props.onRemoveShiftType({ id: shiftType.id })}
+                  >
                     <Icon name="Trash" size="sm" backgroundColor="#2e3e4f" iconColour="#FF0000" />
                   </div>
                 </div>
@@ -90,7 +93,8 @@ ShiftTypesScreen.propTypes = {
   ),
   shiftTypesById: PropTypes.object.isRequired,
   onAddShiftType: PropTypes.func.isRequired,
-  onUpdateShiftType: PropTypes.func.isRequired
+  onUpdateShiftType: PropTypes.func.isRequired,
+  onRemoveShiftType: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -100,7 +104,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   onAddShiftType: addShiftType,
-  onUpdateShiftType: updateShiftType
+  onUpdateShiftType: updateShiftType,
+  onRemoveShiftType: removeShiftType
 };
 
 export default connect(

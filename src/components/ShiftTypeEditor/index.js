@@ -21,14 +21,18 @@ class ShiftTypeEditor extends React.Component {
   handleSavePressed = () => {
     const { newDisplayName, newColor } = this.state;
 
+    if (!newDisplayName || newDisplayName.length === 0) {
+      return;
+    }
+
+    if (!newColor || newColor.length === 0) {
+      return;
+    }
+
     this.props.onSave({
       color: newColor,
       displayName: newDisplayName
     });
-  };
-
-  handleCancelPressed = () => {
-    this.props.onCancel();
   };
 
   render() {
