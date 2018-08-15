@@ -3,6 +3,7 @@
   padding-bottom: 0.9rem;
   margin-right: 1px;
   margin-left: 1px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .calendar-day-interactive {

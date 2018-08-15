@@ -1,0 +1,17 @@
+.shift-types-screen {
+  background-color: #2e3e4f;
+}
+
+.shift-types-screen__row {
+  display: flex;
+  flex: 1;
+}
+
+.shift-types-screen__indicator {
+  flex: 1;
+  align-self: center;
+}
+
+.shift-types-screen__delete {
+  -webkit-tap-highlight-color: transparent;
+}

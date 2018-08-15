@@ -7,6 +7,7 @@ const availableIcons = {
   Hamburger: require("./Hamburger").default,
   LockedLock: require("./LockedLock").default,
   Link: require("./Link").default,
+  Trash: require("./Trash").default,
   UnlockedLock: require("./UnlockedLock").default
 };
 
@@ -54,8 +55,15 @@ const Icon = ({ backgroundColor = null, name = null, iconColour = null, size = "
 
 Icon.propTypes = {
   backgroundColor: PropTypes.string,
-  name: PropTypes.oneOf(["Edit", "Hamburger", "LockedLock", "UnlockedLock", "Link", "Github"])
-    .isRequired,
+  name: PropTypes.oneOf([
+    "Edit",
+    "Hamburger",
+    "LockedLock",
+    "UnlockedLock",
+    "Link",
+    "Github",
+    "Trash"
+  ]).isRequired,
   iconColour: PropTypes.string,
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
   onPress: PropTypes.func
