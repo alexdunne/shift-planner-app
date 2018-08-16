@@ -59,6 +59,9 @@
 }
 
 .sidebar__icon-attribution {
-  color: #31ad98;
+  background: #31ad98;
   text-decoration: none;
+  color: #fff;
+  padding: 3px 6px;
+  border-radius: 5px;
 }

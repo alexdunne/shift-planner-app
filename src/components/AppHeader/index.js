@@ -11,7 +11,7 @@ const AppHeader = ({ onToggleSidebar }) => (
     <div className="app-container">
       <Row alignItems="center">
         <Col span={2}>
-          <div onClick={onToggleSidebar}>
+          <div className="no-select" onClick={onToggleSidebar}>
             <Icon name="Hamburger" size="xs" backgroundColor="#03A9F4" iconColour="#FFFFFF" />
           </div>
         </Col>
