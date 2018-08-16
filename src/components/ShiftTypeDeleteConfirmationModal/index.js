@@ -13,8 +13,8 @@ import "./index.css";
 
 const style = {
   content: {
-    top: "20vh",
-    bottom: "20vh",
+    top: "10vh",
+    bottom: "10vh",
     padding: 0
   }
 };
