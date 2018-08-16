@@ -19,8 +19,15 @@ const SIZE_SCALE = {
   xl: 48
 };
 
-const Icon = ({ backgroundColor = null, name = null, iconColour = null, size = "md", onPress }) => {
-  const containerStyles = {
+const Icon = ({
+  backgroundColor = null,
+  name = null,
+  iconColour = null,
+  size = "md",
+  containerStyles = {},
+  onPress
+}) => {
+  const iconContainerStyles = {
     width: SIZE_SCALE[size],
     height: SIZE_SCALE[size],
     padding: `${SIZE_SCALE[size] / 1.5}px`,
@@ -31,21 +38,22 @@ const Icon = ({ backgroundColor = null, name = null, iconColour = null, size = "
     fontSize: "1rem",
     cursor: "pointer",
     boxSizing: "initial",
-    lineHeight: "1"
+    lineHeight: "1",
+    ...containerStyles
   };
 
   if (backgroundColor) {
-    containerStyles.backgroundColor = backgroundColor;
+    iconContainerStyles.backgroundColor = backgroundColor;
   }
 
   if (iconColour) {
-    containerStyles.color = iconColour;
+    iconContainerStyles.color = iconColour;
   }
 
   const Icon = availableIcons[name];
 
   return (
-    <div style={containerStyles} onClick={onPress}>
+    <div style={iconContainerStyles} onClick={onPress}>
       <div className="fill-width">
         <Icon />
       </div>
@@ -66,6 +74,7 @@ Icon.propTypes = {
   ]).isRequired,
   iconColour: PropTypes.string,
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
+  containerStyles: PropTypes.object,
   onPress: PropTypes.func
 };
 

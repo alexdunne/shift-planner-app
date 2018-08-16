@@ -50,8 +50,6 @@ const removeAllWithShiftType = (state, { payload: { id: shiftTypeId } }) =>
       }
     });
 
-    console.log(remainingList, remainingMap);
-
     draft.allIds = remainingList;
     draft.byId = remainingMap;
   });

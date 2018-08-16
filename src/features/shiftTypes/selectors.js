@@ -5,6 +5,11 @@ export const getShiftTypesList = state => {
   }));
 };
 
+export const getShiftTypeById = (state, props) => ({
+  id: props.shiftTypeId,
+  ...state.shiftTypes.byId[props.shiftTypeId]
+});
+
 export const getShiftTypesById = state => {
   return state.shiftTypes.byId;
 };

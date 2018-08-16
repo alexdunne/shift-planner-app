@@ -40,3 +40,11 @@ svg {
 .text-center {
   text-align: center;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.text-upper {
+  text-transform: uppercase;
+}

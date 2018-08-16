@@ -2,19 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import Button from "components/Button";
 import { Container, Row, Col } from "components/Grid";
 import Icon from "components/Icon/Icon";
+import ShiftTypeDeleteConfirmationModal from "components/ShiftTypeDeleteConfirmationModal";
 import ShiftTypeEditor from "components/ShiftTypeEditor";
 import ShiftTypeIndicator from "components/ShiftTypeIndicator";
 import { addShiftType, updateShiftType, removeShiftType } from "features/shiftTypes/actions";
-import { getShiftTypesList, getShiftTypesById } from "features/shiftTypes/selector";
+import { getShiftTypesList, getShiftTypesById } from "features/shiftTypes/selectors";
 
 import "./index.css";
 
 class ShiftTypesScreen extends React.Component {
   state = {
     addingNewShiftType: false,
-    editingShiftTypeId: null
+    editingShiftTypeId: null,
+    deletingShiftTypeId: null
   };
 
   handleAddNewShiftTypeClicked = () => {
@@ -23,7 +26,7 @@ class ShiftTypesScreen extends React.Component {
 
   render() {
     const { shiftTypes, shiftTypesById } = this.props;
-    const { addingNewShiftType, editingShiftTypeId } = this.state;
+    const { addingNewShiftType, editingShiftTypeId, deletingShiftTypeId } = this.state;
 
     const editingShiftType = shiftTypesById[editingShiftTypeId];
 
@@ -43,7 +46,7 @@ class ShiftTypesScreen extends React.Component {
                   </div>
                   <div
                     className="shift-types-screen__delete"
-                    onClick={() => this.props.onRemoveShiftType({ id: shiftType.id })}
+                    onClick={() => this.setState({ deletingShiftTypeId: shiftType.id })}
                   >
                     <Icon name="Trash" size="sm" backgroundColor="#2e3e4f" iconColour="#FF0000" />
                   </div>
@@ -51,7 +54,12 @@ class ShiftTypesScreen extends React.Component {
               </Col>
             ))}
             <Col>
-              <button onClick={this.handleAddNewShiftTypeClicked}>Add new</button>
+              <Button
+                className="shift-types-screen__add"
+                onClick={this.handleAddNewShiftTypeClicked}
+              >
+                Add new
+              </Button>
             </Col>
           </Row>
         </Container>
@@ -78,6 +86,12 @@ class ShiftTypesScreen extends React.Component {
             onCancel={() => this.setState({ addingNewShiftType: false })}
           />
         )}
+
+        <ShiftTypeDeleteConfirmationModal
+          isOpen={!!deletingShiftTypeId}
+          shiftTypeId={deletingShiftTypeId}
+          onRequestClose={() => this.setState({ deletingShiftTypeId: null })}
+        />
       </React.Fragment>
     );
   }

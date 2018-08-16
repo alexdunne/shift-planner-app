@@ -15,3 +15,10 @@
 .shift-types-screen__delete {
   -webkit-tap-highlight-color: transparent;
 }
+
+.shift-types-screen__add {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

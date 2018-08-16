@@ -4,15 +4,15 @@ import startOfToday from "date-fns/start_of_today";
 import { connect } from "react-redux";
 import memoizeOne from "memoize-one";
 
+import Button from "components/Button";
 import { MonthOverview, CalendarDay, MonthPicker, YearPicker } from "components/Calendar";
-import CalendarLockToggle from "components/CalendarLockToggle";
 import { Container, Row, Col } from "components/Grid";
 import ShiftTypeIndicator from "components/ShiftTypeIndicator";
 import ShiftTypeEditor from "components/ShiftTypeEditor";
 import { addShift, updateShift, removeShift } from "features/shifts/actions";
 import { getShiftsList } from "features/shifts/selectors";
 import { updateShiftType } from "features/shiftTypes/actions";
-import { getShiftTypesList, getShiftTypesById } from "features/shiftTypes/selector";
+import { getShiftTypesList, getShiftTypesById } from "features/shiftTypes/selectors";
 
 import "./index.css";
 
@@ -147,12 +147,14 @@ class OverviewScreen extends Component {
             </Row>
           </Container>
 
-          <CalendarLockToggle
-            locked={locked}
-            onToggle={() => {
+          <Button
+            style={{ backgroundColor: locked ? "#E4165C" : "#8BC34A" }}
+            onClick={() => {
               this.setState({ locked: !this.state.locked });
             }}
-          />
+          >
+            {locked ? "Unlock" : "Editing"}
+          </Button>
         </section>
 
         {editingShiftTypeId && (
