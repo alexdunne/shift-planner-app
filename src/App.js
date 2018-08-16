@@ -4,6 +4,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import AppHeader from "components/AppHeader";
+import Sidebar from "components/Sidebar";
 import OverviewScreen from "screens/OverviewScreen";
 import ShiftTypesScreen from "screens/ShiftTypesScreen";
 import { configureStore } from "store";
@@ -41,22 +42,47 @@ const shiftTypes = {
   ]
 };
 
-const { store, persistor } = configureStore({ shiftTypes });
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-const App = () => (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <Router>
-        <main className="fill-height">
-          <AppHeader />
-          <div className="app-header-offset">
-            <Route exact path="/" component={OverviewScreen} />
-            <Route path="/shift-types" component={ShiftTypesScreen} />
-          </div>
-        </main>
-      </Router>
-    </PersistGate>
-  </Provider>
-);
+    const { store, persistor } = configureStore({ shiftTypes });
+
+    this.state = {
+      store,
+      persistor,
+      isSidebarOpen: false
+    };
+  }
+
+  handleSidebarToggle = () => {
+    this.setState({ isSidebarOpen: !this.state.isSidebarOpen });
+  };
+
+  render() {
+    const { store, persistor, isSidebarOpen } = this.state;
+
+    console.log(isSidebarOpen);
+
+    return (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Router>
+            <main className="fill-height">
+              <AppHeader onToggleSidebar={this.handleSidebarToggle} />
+
+              <Sidebar isOpen={isSidebarOpen} onClose={this.handleSidebarToggle} />
+
+              <div className="app-header-offset">
+                <Route exact path="/" component={OverviewScreen} />
+                <Route path="/shift-types" component={ShiftTypesScreen} />
+              </div>
+            </main>
+          </Router>
+        </PersistGate>
+      </Provider>
+    );
+  }
+}
 
 export default App;

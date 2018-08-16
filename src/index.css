@@ -48,3 +48,9 @@ svg {
 .text-upper {
   text-transform: uppercase;
 }
+
+.list-unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

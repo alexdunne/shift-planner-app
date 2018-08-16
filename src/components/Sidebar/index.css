@@ -1,0 +1,36 @@
+.sidebar {
+  position: absolute;
+  height: 100%;
+  width: 75vw;
+  max-width: 400px;
+  background-color: #2e3e4f;
+  padding: 50px 30px;
+  z-index: 3;
+}
+
+.sidebar__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.sidebar__link-item {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar__link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+.sidebar__link--active {
+  color: #8bb8e7;
+}

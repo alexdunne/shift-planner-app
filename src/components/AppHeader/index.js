@@ -1,19 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { Row, Col } from "components/Grid";
 import Icon from "components/Icon/Icon";
 
 import "./index.css";
 
-const AppHeader = () => (
+const AppHeader = ({ onToggleSidebar }) => (
   <header className="app-header">
     <div className="app-container">
       <Row alignItems="center">
         <Col span={2}>
-          <Link to="/shift-types">
+          <div onClick={onToggleSidebar}>
             <Icon name="Hamburger" size="xs" backgroundColor="#03A9F4" iconColour="#FFFFFF" />
-          </Link>
+          </div>
         </Col>
         <Col span={8}>{<div className="text-center">Shift Planner</div>}</Col>
         <Col span={2}>
@@ -34,5 +34,9 @@ const AppHeader = () => (
     </div>
   </header>
 );
+
+AppHeader.propTypes = {
+  onToggleSidebar: PropTypes.func.isRequired
+};
 
 export default AppHeader;
