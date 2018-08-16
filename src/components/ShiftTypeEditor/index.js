@@ -40,7 +40,7 @@ class ShiftTypeEditor extends React.Component {
     return (
       <div>
         <div className="shift-type-editor__container">
-          <div className="shift-type-editor__overlay" onClick={this.handleSavePressed} />
+          <div className="shift-type-editor__overlay" onClick={this.props.onCancel} />
 
           <div className="shift-type-editor__config-container">
             <input

@@ -8,13 +8,9 @@ class Sidebar extends React.Component {
   render() {
     const { isOpen, onClose } = this.props;
 
-    if (!isOpen) {
-      return null;
-    }
-
     return (
       <React.Fragment>
-        <div className="sidebar">
+        <div className={`sidebar ${isOpen ? "sidebar--active" : ""}`}>
           <ul className="list-unstyled">
             <li className="sidebar__link-item">
               <NavLink
@@ -38,8 +34,25 @@ class Sidebar extends React.Component {
               </NavLink>
             </li>
           </ul>
+
+          <div className="sidebar__icon-attribution-container">
+            <span>
+              Icons provided by{" "}
+              <a
+                href="https://fontawesome.com/license"
+                className="sidebar__icon-attribution"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                fontawesome
+              </a>
+            </span>
+          </div>
         </div>
-        <div className="sidebar__overlay" onClick={onClose} />
+        <div
+          className={`sidebar__overlay ${isOpen ? "sidebar__overlay--active" : ""}`}
+          onClick={onClose}
+        />
       </React.Fragment>
     );
   }

@@ -1,11 +1,17 @@
 .sidebar {
   position: absolute;
+  left: -75vw;
   height: 100%;
   width: 75vw;
-  max-width: 400px;
+  max-width: 300px;
   background-color: #2e3e4f;
   padding: 50px 30px;
   z-index: 3;
+  transition: all 200ms ease-in-out;
+}
+
+.sidebar--active {
+  left: 0;
 }
 
 .sidebar__overlay {
@@ -16,10 +22,15 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 2;
+  display: none;
+}
+
+.sidebar__overlay--active {
+  display: block;
 }
 
 .sidebar__link-item {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .sidebar__link {
@@ -33,4 +44,21 @@
 
 .sidebar__link--active {
   color: #8bb8e7;
+}
+
+.sidebar__icon-attribution-container {
+  display: flex;
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  width: 100%;
+  font-size: 1.1rem;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar__icon-attribution {
+  color: #31ad98;
+  text-decoration: none;
 }

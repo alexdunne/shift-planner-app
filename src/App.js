@@ -55,23 +55,25 @@ class App extends React.Component {
     };
   }
 
-  handleSidebarToggle = () => {
-    this.setState({ isSidebarOpen: !this.state.isSidebarOpen });
+  handleOpenSidebar = () => {
+    this.setState({ isSidebarOpen: true });
+  };
+
+  handleCloseSidebar = () => {
+    this.setState({ isSidebarOpen: false });
   };
 
   render() {
     const { store, persistor, isSidebarOpen } = this.state;
-
-    console.log(isSidebarOpen);
 
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Router>
             <main className="fill-height">
-              <AppHeader onToggleSidebar={this.handleSidebarToggle} />
+              <AppHeader onToggleSidebar={this.handleOpenSidebar} />
 
-              <Sidebar isOpen={isSidebarOpen} onClose={this.handleSidebarToggle} />
+              <Sidebar isOpen={isSidebarOpen} onClose={this.handleCloseSidebar} />
 
               <div className="app-header-offset">
                 <Route exact path="/" component={OverviewScreen} />
