@@ -20,7 +20,7 @@ class Sidebar extends React.Component {
                 activeClassName="sidebar__link--active"
                 onClick={onClose}
               >
-                Home
+                <div>Home</div>
               </NavLink>
             </li>
             <li className="sidebar__link-item">
@@ -30,7 +30,7 @@ class Sidebar extends React.Component {
                 activeClassName="sidebar__link--active"
                 onClick={onClose}
               >
-                Shift types
+                <div>Shift types</div>
               </NavLink>
             </li>
           </ul>
