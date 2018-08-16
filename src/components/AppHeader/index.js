@@ -8,8 +8,8 @@ import "./index.css";
 
 const AppHeader = ({ onToggleSidebar }) => (
   <header className="app-header">
-    <div className="app-container">
-      <Row alignItems="center">
+    <div className="app-container" className="fill-height">
+      <Row alignItems="center" className="fill-height">
         <Col span={2}>
           <div className="no-select" onClick={onToggleSidebar}>
             <Icon name="Hamburger" size="xs" backgroundColor="#03A9F4" iconColour="#FFFFFF" />
