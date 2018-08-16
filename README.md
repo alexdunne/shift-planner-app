@@ -16,4 +16,4 @@ To run the analyser use `yarn bundle-analyse`
 
 ### Todo
 
-- Add https://fontawesome.com/license attribution to the app
+- Fix storybooks

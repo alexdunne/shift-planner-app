@@ -2,13 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const availableIcons = {
-  Edit: require("./Edit").default,
   Github: require("./Github").default,
   Hamburger: require("./Hamburger").default,
-  LockedLock: require("./LockedLock").default,
-  Link: require("./Link").default,
-  Trash: require("./Trash").default,
-  UnlockedLock: require("./UnlockedLock").default
+  Trash: require("./Trash").default
 };
 
 const SIZE_SCALE = {
@@ -63,15 +59,7 @@ const Icon = ({
 
 Icon.propTypes = {
   backgroundColor: PropTypes.string,
-  name: PropTypes.oneOf([
-    "Edit",
-    "Hamburger",
-    "LockedLock",
-    "UnlockedLock",
-    "Link",
-    "Github",
-    "Trash"
-  ]).isRequired,
+  name: PropTypes.oneOf(["Hamburger", "Github", "Trash"]).isRequired,
   iconColour: PropTypes.string,
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
   containerStyles: PropTypes.object,
