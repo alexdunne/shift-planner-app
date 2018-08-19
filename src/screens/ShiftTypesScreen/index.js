@@ -56,6 +56,7 @@ class ShiftTypesScreen extends React.Component {
             <Col>
               <Button
                 className="shift-types-screen__add"
+                disabled={shiftTypes.length === 6}
                 onClick={this.handleAddNewShiftTypeClicked}
               >
                 Add new
