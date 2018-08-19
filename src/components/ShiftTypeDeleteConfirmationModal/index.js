@@ -12,10 +12,15 @@ import { getShiftTypeById } from "features/shiftTypes/selectors";
 import "./index.css";
 
 const style = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.7)"
+  },
   content: {
     top: "10vh",
     bottom: "10vh",
-    padding: 0
+    padding: 0,
+    borderRadius: "0",
+    border: "none"
   }
 };
 
