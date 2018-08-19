@@ -20,13 +20,13 @@ class OverviewScreen extends Component {
   constructor(props) {
     super(props);
 
-    const now = startOfToday();
+    const today = startOfToday();
 
     this.state = {
       locked: true,
-      todayTimestamp: now.getTime(),
-      month: now.getMonth() + 1,
-      year: now.getFullYear(),
+      todayTimestamp: today.getTime(),
+      month: today.getMonth() + 1,
+      year: today.getFullYear(),
       dayHeaders: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       editingShiftTypeId: null
     };
