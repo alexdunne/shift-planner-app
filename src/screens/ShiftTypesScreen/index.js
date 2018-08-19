@@ -63,29 +63,28 @@ class ShiftTypesScreen extends React.Component {
             </Col>
           </Row>
         </Container>
-        {editingShiftTypeId && (
-          <ShiftTypeEditor
-            color={editingShiftType.color}
-            displayName={editingShiftType.displayName}
-            onSave={config => {
-              this.props.onUpdateShiftType({ id: editingShiftTypeId, config });
-              this.setState({ editingShiftTypeId: null });
-            }}
-            onCancel={() => this.setState({ editingShiftTypeId: null })}
-          />
-        )}
 
-        {addingNewShiftType && (
-          <ShiftTypeEditor
-            color="#0187d1"
-            displayName=""
-            onSave={config => {
-              this.props.onAddShiftType({ config });
-              this.setState({ addingNewShiftType: false });
-            }}
-            onCancel={() => this.setState({ addingNewShiftType: false })}
-          />
-        )}
+        <ShiftTypeEditor
+          isOpen={!!editingShiftTypeId}
+          color={editingShiftType && editingShiftType.color}
+          displayName={editingShiftType && editingShiftType.displayName}
+          onSave={config => {
+            this.props.onUpdateShiftType({ id: editingShiftTypeId, config });
+            this.setState({ editingShiftTypeId: null });
+          }}
+          onRequestClose={() => this.setState({ editingShiftTypeId: null })}
+        />
+
+        <ShiftTypeEditor
+          isOpen={addingNewShiftType}
+          color="#0187d1"
+          displayName=""
+          onSave={config => {
+            this.props.onAddShiftType({ config });
+            this.setState({ addingNewShiftType: false });
+          }}
+          onRequestClose={() => this.setState({ addingNewShiftType: false })}
+        />
 
         <ShiftTypeDeleteConfirmationModal
           isOpen={!!deletingShiftTypeId}

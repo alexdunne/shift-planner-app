@@ -1,14 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SwatchesPicker from "react-color/lib/Swatches";
+import ReactModal from "react-modal";
 
 import "./index.css";
+
+const style = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.7)"
+  },
+  content: {
+    top: "10vh",
+    bottom: "10vh",
+    padding: 0,
+    borderRadius: "0",
+    border: "none"
+  }
+};
 
 class ShiftTypeEditor extends React.Component {
   state = {
     newDisplayName: this.props.displayName,
     newColor: this.props.color
   };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.isOpen !== this.props.isOpen) {
+      this.setState({
+        newColor: this.props.color,
+        newDisplayName: this.props.displayName
+      });
+    }
+  }
 
   handleColorChange = color => {
     this.setState({ newColor: color.hex });
@@ -37,11 +60,11 @@ class ShiftTypeEditor extends React.Component {
 
   render() {
     const { newColor, newDisplayName } = this.state;
-    return (
-      <div>
-        <div className="shift-type-editor__container">
-          <div className="shift-type-editor__overlay" onClick={this.props.onCancel} />
+    const { isOpen, onRequestClose } = this.props;
 
+    return (
+      <ReactModal isOpen={isOpen} style={style} onRequestClose={onRequestClose}>
+        {isOpen && (
           <div className="shift-type-editor__config-container">
             <input
               type="text"
@@ -66,17 +89,18 @@ class ShiftTypeEditor extends React.Component {
               Save
             </button>
           </div>
-        </div>
-      </div>
+        )}
+      </ReactModal>
     );
   }
 }
 
 ShiftTypeEditor.propTypes = {
-  displayName: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  displayName: PropTypes.string,
+  color: PropTypes.string,
   onSave: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired
+  onRequestClose: PropTypes.func.isRequired
 };
 
 export default ShiftTypeEditor;
