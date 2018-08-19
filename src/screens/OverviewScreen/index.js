@@ -26,7 +26,6 @@ class OverviewScreen extends React.Component {
       today,
       month: today.getMonth() + 1,
       year: today.getFullYear(),
-      dayHeaders: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       editingShiftTypeId: null
     };
   }
@@ -35,7 +34,6 @@ class OverviewScreen extends React.Component {
     const { month, year, today, editingShiftTypeId } = this.state;
     const { shiftTypesList, shiftTypesById } = this.props;
 
-    const dayHeaders = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     const editingShiftType = shiftTypesById[editingShiftTypeId];
 
     return (
@@ -77,7 +75,7 @@ class OverviewScreen extends React.Component {
                 </Row>
 
                 <Row className="mb-3">
-                  {dayHeaders.map(day => (
+                  {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(day => (
                     <Col key={day}>{day}</Col>
                   ))}
                 </Row>
@@ -93,7 +91,7 @@ class OverviewScreen extends React.Component {
                           this.props.onDateSelected({
                             shift,
                             date,
-                            shiftTypesList: this.props.shiftTypesList
+                            shiftTypesList
                           });
                         }
                       }}
@@ -112,17 +110,16 @@ class OverviewScreen extends React.Component {
           )}
         </Toggle>
 
-        {editingShiftTypeId && (
-          <ShiftTypeEditor
-            color={editingShiftType.color}
-            displayName={editingShiftType.displayName}
-            onSave={config => {
-              this.props.onUpdateShiftType({ id: editingShiftTypeId, config });
-              this.setState({ editingShiftTypeId: null });
-            }}
-            onCancel={() => this.setState({ editingShiftTypeId: null })}
-          />
-        )}
+        <ShiftTypeEditor
+          isOpen={!!editingShiftTypeId}
+          color={editingShiftType && editingShiftType.color}
+          displayName={editingShiftType && editingShiftType.displayName}
+          onSave={config => {
+            this.props.onUpdateShiftType({ id: editingShiftTypeId, config });
+            this.setState({ editingShiftTypeId: null });
+          }}
+          onRequestClose={() => this.setState({ editingShiftTypeId: null })}
+        />
       </React.Fragment>
     );
   }
