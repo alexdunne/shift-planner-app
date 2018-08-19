@@ -8,7 +8,7 @@ import "./index.css";
 
 const AppHeader = ({ onToggleSidebar }) => (
   <header className="app-header">
-    <div className="app-container" className="fill-height">
+    <div className="app-container fill-height">
       <Row alignItems="center" className="fill-height">
         <Col span={2}>
           <div className="no-select" onClick={onToggleSidebar}>
