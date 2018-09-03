@@ -9,6 +9,4 @@ firebase.initializeApp({
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 });
 
-const databaseRef = firebase.database().ref();
-
-export default databaseRef;
+export default firebase;
