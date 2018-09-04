@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
+import { auth } from "config/firebase";
+
 import "./index.css";
 
 class Sidebar extends React.Component {
@@ -32,6 +34,11 @@ class Sidebar extends React.Component {
               >
                 <div>Shift types</div>
               </NavLink>
+            </li>
+            <li>
+              <a className="sidebar__link" onClick={auth.signInAnonymously}>
+                <div>Login</div>
+              </a>
             </li>
           </ul>
 

@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import AppHeader from "components/AppHeader";
 import Sidebar from "components/Sidebar";
+import Auth from "containers/Auth";
 import OverviewScreen from "screens/OverviewScreen";
 import ShiftTypesScreen from "screens/ShiftTypesScreen";
 import { configureStore } from "store";
@@ -69,18 +70,20 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Router>
-            <main className="fill-height">
-              <AppHeader onToggleSidebar={this.handleOpenSidebar} />
+          <Auth>
+            <Router>
+              <main className="fill-height">
+                <AppHeader onToggleSidebar={this.handleOpenSidebar} />
 
-              <Sidebar isOpen={isSidebarOpen} onClose={this.handleCloseSidebar} />
+                <Sidebar isOpen={isSidebarOpen} onClose={this.handleCloseSidebar} />
 
-              <div className="app-header-offset">
-                <Route exact path="/" component={OverviewScreen} />
-                <Route path="/shift-types" component={ShiftTypesScreen} />
-              </div>
-            </main>
-          </Router>
+                <div className="app-header-offset">
+                  <Route exact path="/" component={OverviewScreen} />
+                  <Route path="/shift-types" component={ShiftTypesScreen} />
+                </div>
+              </main>
+            </Router>
+          </Auth>
         </PersistGate>
       </Provider>
     );

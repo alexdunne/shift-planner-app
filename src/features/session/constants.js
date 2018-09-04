@@ -1,0 +1,3 @@
+export const SIGNING_IN = "SIGNING_IN";
+export const SIGNED_IN_ANONYMOUSLY = "SIGNED_IN_ANONYMOUSLY";
+export const SIGNED_OUT = "SIGNED_OUT";
