@@ -13,7 +13,3 @@ You can view the UI components in storybook format by using `yarn storybook`.
 ## Webpack bundle analyser
 
 To run the analyser use `yarn bundle-analyse`
-
-### Todo
-
-- Fix storybooks

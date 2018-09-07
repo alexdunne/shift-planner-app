@@ -30,8 +30,6 @@
     "bundle-analyse": "cross-env NODE_PATH=src node build.js"
   },
   "devDependencies": {
-    "@dump247/storybook-state": "^1.5.0",
-    "@storybook/react": "^3.4.8",
     "babel-core": "^6.26.3",
     "cross-env": "^5.2.0",
     "redux-logger": "^3.0.6",
