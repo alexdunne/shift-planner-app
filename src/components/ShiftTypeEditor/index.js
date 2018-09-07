@@ -14,7 +14,9 @@ const style = {
     bottom: "10vh",
     padding: 0,
     borderRadius: "0",
-    border: "none"
+    border: "none",
+    left: "calc(50vw - 185px)",
+    maxWidth: "370px"
   }
 };
 
