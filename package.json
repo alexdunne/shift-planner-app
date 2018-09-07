@@ -24,7 +24,6 @@
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "cross-env NODE_PATH=src react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9001 -c .storybook",
     "bundle-analyse": "cross-env NODE_PATH=src node build.js"
   },
   "devDependencies": {
